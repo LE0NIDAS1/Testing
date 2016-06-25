@@ -1,0 +1,401 @@
+﻿@model PresentationLayer.Models.GameModel
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Edit</h2>
+
+
+@using (Html.BeginForm("Edit", "Game", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>GameModel</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.id)
+
+        <ul class="nav nav-tabs" role="tablist">
+            <li role="presentation" class="active"><a href="#GameModel" role="tab" data-toggle="tab">Game</a></li>
+            <li role="presentation"><a href="#Category" role="tab" data-toggle="tab">Category</a></li>
+            <li role="presentation"><a href="#Resource" role="tab" data-toggle="tab">Resource</a></li>
+            <li role="presentation"><a href="#GameObject" role="tab" data-toggle="tab">GameObject</a></li>
+            <li role="presentation"><a href="#ActionConfig" role="tab" data-toggle="tab">Action</a></li>
+            <li role="presentation"><a href="#InitialInstance" role="tab" data-toggle="tab">InitialInstance</a></li>
+        </ul>
+
+        <div class="tab-content">
+            <div role="tabpanel" class="tab-pane active" id="GameModel">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.name, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.name, new { htmlAttributes = new { @class = "form-control", required = "required" } })
+                        @Html.ValidationMessageFor(model => model.name, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.domain, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.domain, new { htmlAttributes = new { @class = "form-control", required = "required" } })
+                        @Html.ValidationMessageFor(model => model.domain, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-md-2">@Html.DisplayNameFor(model => model.css)</label>
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.css, new { htmlAttributes = new { @readonly = "readonly", @class = "form-control" } })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.css_file, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.css_file, new { htmlAttributes = new { type = "file", accept = "text/css", @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.css_file, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-2">@Html.DisplayNameFor(model => model.Logo)</label>
+                    <div class="col-md-10">
+                        <img src="@Model.Logo" class="img-thumbnail" width="304" height="236" id="Logo">
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Logo_File, htmlAttributes: new { @class = "control-label col-md-2", required = "required" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Logo_File, new { htmlAttributes = new { type = "file", accept = "image/jpeg,image/x-png,image/gif", @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Logo_File, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.state, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.state, new { htmlAttributes = new { @readonly = "readonly", @class = "form-control", required = "required" } })
+                        @Html.ValidationMessageFor(model => model.state, "", new { @class = "text-danger" })
+                        <div class="onoffswitch">
+                            <input type="checkbox" onclick="changeState()" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch">
+                            <label class="onoffswitch-label" for="myonoffswitch"></label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.FacebookAppID, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.FacebookAppID, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.FacebookAppID, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.facebookAuth, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.facebookAuth, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.facebookAuth, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.FacebookAppSecret, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.FacebookAppSecret, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.FacebookAppSecret, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.GoogleClientID, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.GoogleClientID, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.GoogleClientID, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.GoogleClientSecret, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.GoogleClientSecret, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.GoogleClientSecret, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+
+            <div role="tabpanel" class="tab-pane" id="Category">
+                <p>
+                    @Html.ActionLink("Create New", "Create", "Category", new { idGame = Model.id }, null)
+                </p>
+                <table class="table">
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.CategoryModel.Name)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.CategoryModel.Tooltip)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.CategoryModel.Image)
+                        </th>
+                        <th></th>
+                    </tr>
+
+                    @foreach (var item in (Model.categories))
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Name)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Tooltip)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Image)
+                            </td>
+                            <td>
+                                @Html.ActionLink("Edit", "Edit", "Category", new { id = item.Id }, null) |
+                                @*@Html.ActionLink("Details", "Details", "Category", new { id = item.Id }, null) |*@
+                                @Html.ActionLink("Delete", "Delete", "Category", new { id = item.Id }, null)
+                            </td>
+                        </tr>
+                    }
+
+                </table>
+            </div>
+            <div role="tabpanel" class="tab-pane" id="Resource">
+                <p>
+                    @Html.ActionLink("Create New", "Create", "Resource", new { idGame = Model.id }, null)
+                </p>
+                <table class="table">
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.resourceModel.Name)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.resourceModel.Image_file)
+                        </th>
+                        <th></th>
+                    </tr>
+                    @foreach (var item in (Model.resources))
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Name)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Image)
+                            </td>
+                            <td>
+                                @Html.ActionLink("Edit", "Edit", "Resource", new { id = item.Id }, null) |
+                                @*@Html.ActionLink("Details", "Details", "Resource", new { id = item.Id }, null) |*@
+                                @Html.ActionLink("Delete", "Delete", "Resource", new { id = item.Id }, null)
+                            </td>
+                        </tr>
+                    }
+                </table>
+            </div>
+            <div role="tabpanel" class="tab-pane" id="GameObject">
+                <p>
+                    @Html.ActionLink("Create New", "Create", "GameObject", new { idGame = Model.id }, null)
+                </p>
+                <table class="table">
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.CategoryModel.GameObject.Name)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.CategoryModel.GameObject.Description)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.CategoryModel.GameObject.Image)
+                        </th>
+                        <th></th>
+                    </tr>
+
+                    @foreach (var item in (Model.gameObjects))
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Name)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Description)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Image)
+                            </td>
+                            <td>
+                                @Html.ActionLink("Edit", "Edit", "GameObject", new { id = item.Id, idGame = Model.id }, null) |
+                                @*@Html.ActionLink("Details", "Details", "GameObject", new { id = item.Id }, null) |*@
+                                @Html.ActionLink("Delete", "Delete", "GameObject", new { id = item.Id }, null)
+                            </td>
+                        </tr>
+                    }
+
+                </table>
+            </div>
+
+            <div role="tabpanel" class="tab-pane" id="InitialInstance">
+                <p>
+                    @Html.ActionLink("Agregar Objetos al Iniciar", "Index", "InitialGameObject", new { idGame = Model.id }, null)
+                </p>
+
+                <table class="table">
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.initialGameObjectModel.Name)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.initialGameObjectModel.Quantity)
+                        </th>
+                    </tr>
+
+
+                    @foreach (var item in (Model.iniGameObjects))
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Name)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Quantity)
+                            </td>
+                            <td>
+                                @Html.ActionLink("Edit", "Edit", "InitialGameObject", new { id = item.IdGameObject, idGame = item.IdGame }, null)
+
+                            </td>
+                        </tr>
+
+                    }
+                </table>
+                <p>
+                    @Html.ActionLink("Agregar Recursos al Iniciar", "Index", "InitialResource", new { idGame = Model.id }, null)
+                </p>
+                <table class="table">
+
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.InitialResourceModel.Name)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.InitialResourceModel.Quantity)
+                        </th>
+                    </tr>
+                    @foreach (var item in (Model.iniResource))
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Name)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Quantity)
+                            </td>
+                            <td>
+                                @Html.ActionLink("Edit", "Edit", "InitialResource", new { id = item.idResource, idGame = item.IdGame }, null)
+
+                            </td>
+
+                        </tr>
+                    }
+
+
+                </table>
+            </div>
+
+            <div role="tabpanel" class="tab-pane" id="ActionConfig">
+                <p>
+                    @Html.ActionLink("Create New", "Create", "ActionConfig", new { idGame = Model.id }, null)
+                </p>
+                <p>
+                    @Html.ActionLink("Create Simple Attack", "CreateSimpleAttack", "SimpleAttack", new { idGame = Model.id }, null)
+                </p>
+                <p>
+                    @Html.ActionLink("Edit Simple Attack", "EditSimpleAttack", "SimpleAttack", new { id = 3, idGame = Model.id }, null)
+                </p>
+                <table class="table">
+                    <tr>
+                        <th>
+                        </th>
+                        <th></th>
+                    </tr>
+
+                    @*@foreach (var item in (Model.actions))
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Name)
+                                </td>
+                                <td>
+                                    @Html.ActionLink("Edit", "Edit", "ActionConfig", new { id = item.Id }, null) |
+                                    @Html.ActionLink("Details", "Details", "ActionConfig", new { id = item.Id }, null) |
+                                    @Html.ActionLink("Delete", "Delete", "ActionConfig", new { id = item.Id }, null)
+                                </td>
+                            </tr>
+                        }*@
+
+                </table>
+            </div>
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Save" class="btn btn-info" />
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript">
+
+        function readURL(input) {
+
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#Logo').attr('src', e.target.result);
+                }
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        $("#Logo_File").change(function () {
+            readURL(this);
+        });
+
+    </script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            if ($('#state').attr("value") == "Activo") {
+                $('#myonoffswitch').prop('checked', true);
+                $('#state').text("Activo");
+            }
+            else {
+                $('#myonoffswitch').prop('checked', false);
+                $('#state').text("Inactivo");
+            }
+        });
+
+        function changeState() {
+            if ($('#state').attr("value") == "Activo") {
+                $('#state').attr("value", "Inactivo");
+                $('#state').text("Inactivo");
+            }
+            else if ($('#state').attr("value") == "Inactivo") {
+                $('#state').attr("value", "Activo");
+                $('#state').text("Activo");
+            }
+        };
+
+    </script>
+}

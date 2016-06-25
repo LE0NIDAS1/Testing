@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE root [
+  <!ELEMENT ERROR ANY>
+  <!ATTLIST ERROR id ID #REQUIRED >
+]>
+<root>
+
+  <ERROR id="1" Mensaje="Ha ocurrido un error. La página solicitada no esta disponible."></ERROR>
+  <ERROR id="2" Mensaje="Ha ocurrido un error. El formulario no puede ser deplegado debido a que los permisos del usuario no pueden ser consultados."></ERROR>
+  <ERROR id="3" Mensaje="Ha ocurrido un error. El cargo del usuario no puede ser recuperado."></ERROR>
+  <ERROR id="5" Mensaje="Ha ocurrido un error. El reporte no puede ser desplegado."></ERROR>
+  <ERROR id="6" Mensaje="Ha ocurrido un error. El menú no puede ser desplegado."></ERROR>
+  <ERROR id="7" Mensaje="Ha ocurrido un error. No es posible recuperar los datos"></ERROR>
+  <ERROR id="8" Mensaje="El nombre de usuario o la clave ingresada no son válidos. Por favor verifique. "></ERROR>
+  <ERROR id="10" Mensaje="Ha ocurrido un error. No es posible recuperar el logo del cliente."></ERROR>
+  <ERROR id="11" Mensaje="Ha ocurrido un error. No es posible cargar los datos en la grilla."></ERROR>
+  <ERROR id="12" Mensaje="Ha ocurrido un error que no permite efectuar la operación."></ERROR>
+  <ERROR id="13" Mensaje="Ha ocurrido un error el archivo no existe."></ERROR>
+
+  <!-- ****************************************************   -->
+  <!-- ****************      GAME        ******************   -->
+  <!-- ****************************************************   -->
+
+  <ERROR id="100" Mensaje="Ha ocurrido un error. bla bla 1."></ERROR>
+  <ERROR id="101" Mensaje="Ha ocurrido un error. bla bla 2."></ERROR>
+  <ERROR id="102" Mensaje="Ha ocurrido un error. bla bla 3."></ERROR>
+  <ERROR id="103" Mensaje="Ha ocurrido un error. bla bla 4."></ERROR>
+
+
+  <!-- ****************************************************   -->
+  <!-- *******************   CATEGORY    ******************   -->
+  <!-- ****************************************************   -->
+
+  <ERROR id="200" Mensaje="Ha ocurrido un error. bla bla 1."></ERROR>
+  <ERROR id="201" Mensaje="Ha ocurrido un error. bla bla 2."></ERROR>
+  <ERROR id="202" Mensaje="Ha ocurrido un error. bla bla 3."></ERROR>
+  <ERROR id="203" Mensaje="Ha ocurrido un error. bla bla 4."></ERROR>
+
+  <!-- ****************************************************   -->
+  <!-- *******************    RESOURCE   ******************   -->
+  <!-- ****************************************************   -->
+
+  <ERROR id="300" Mensaje="Ha ocurrido un error. bla bla 1."></ERROR>
+  <ERROR id="301" Mensaje="Ha ocurrido un error. bla bla 2."></ERROR>
+  <ERROR id="302" Mensaje="Ha ocurrido un error. bla bla 3."></ERROR>
+  <ERROR id="303" Mensaje="Ha ocurrido un error. bla bla 4."></ERROR>
+
+  <!-- ****************************************************   -->
+  <!-- *********************  OTROS   *********************   -->
+  <!-- ****************************************************   -->
+
+  <ERROR id="1000" Mensaje="Se debe pasar el identificador del/de la {0} como parámetro."></ERROR>
+  <ERROR id="1001" Mensaje="No existe el/la {0} solicitado/a."></ERROR>
+
+</root>

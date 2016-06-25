@@ -1,0 +1,1845 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="ResourceModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AspNetUsers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="256" />
+          <Property Name="EmailConfirmed" Type="bit" Nullable="false" />
+          <Property Name="PasswordHash" Type="nvarchar(max)" />
+          <Property Name="SecurityStamp" Type="nvarchar(max)" />
+          <Property Name="PhoneNumber" Type="nvarchar(max)" />
+          <Property Name="PhoneNumberConfirmed" Type="bit" Nullable="false" />
+          <Property Name="TwoFactorEnabled" Type="bit" Nullable="false" />
+          <Property Name="LockoutEndDateUtc" Type="datetime" />
+          <Property Name="LockoutEnabled" Type="bit" Nullable="false" />
+          <Property Name="AccessFailedCount" Type="int" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TABActionConfig">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ID_GAME_FK" Type="int" Nullable="false" />
+          <Property Name="LevelUpCostRate" Type="int" />
+          <Property Name="LevelUpGenerateRate" Type="int" />
+          <Property Name="Type" Type="int" Nullable="false" />
+          <Property Name="ID_GAMEOBJECT" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TABActionConfigDepends">
+          <Key>
+            <PropertyRef Name="ID_ACTIONCONFIG" />
+            <PropertyRef Name="ID_GAMEOBJECT" />
+            <PropertyRef Name="ID_ATTRIBUTE" />
+          </Key>
+          <Property Name="ID_ACTIONCONFIG" Type="int" Nullable="false" />
+          <Property Name="ID_GAMEOBJECT" Type="int" Nullable="false" />
+          <Property Name="ID_ATTRIBUTE" Type="int" Nullable="false" />
+          <Property Name="Value" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TABAdmin">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Nick" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Pass" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Picture" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="TABAttackConfig">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="PercentLoss" Type="int" Nullable="false" />
+          <Property Name="PercentGain" Type="int" Nullable="false" />
+          <Property Name="MaxPlayers" Type="int" />
+          <Property Name="ID_GAME_FK" Type="int" Nullable="false" />
+          <Property Name="Type" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TABAttackGameObject">
+          <Key>
+            <PropertyRef Name="ID_ATTACKCONFIG_FK" />
+            <PropertyRef Name="ID_GAMEOBJECT_FK" />
+          </Key>
+          <Property Name="ID_ATTACKCONFIG_FK" Type="int" Nullable="false" />
+          <Property Name="ID_GAMEOBJECT_FK" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TABAttribute">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Value" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Type" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ID_GAMEOBJECT_FK" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TABCategory">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ToolTip" Type="varchar(max)" Nullable="false" />
+          <Property Name="Image" Type="varchar(max)" Nullable="false" />
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID_GAME_FK" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TABCost">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="Quantity" Type="int" Nullable="false" />
+          <Property Name="ID_RESOURCE_FK" Type="int" Nullable="false" />
+          <Property Name="ID_GAMEOBJECT_FK" Type="int" Nullable="false" />
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TABEvent">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="expiration" Type="datetime2" Precision="7" />
+          <Property Name="ID_NOTIFICATION_FK" Type="int" />
+        </EntityType>
+        <EntityType Name="TABGame">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Dominio" Type="varchar(max)" Nullable="false" />
+          <Property Name="CSS" Type="varchar(max)" />
+          <Property Name="Estado" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Logo" Type="varchar" MaxLength="50" />
+          <Property Name="FacebookAppID" Type="varchar" MaxLength="50" />
+          <Property Name="FacebookAuth" Type="tinyint" />
+          <Property Name="FacebookAppSecret" Type="varchar" MaxLength="50" />
+          <Property Name="GoogleClientID" Type="varchar" MaxLength="50" />
+          <Property Name="GoogleClientSecret" Type="varchar" MaxLength="50" />
+          <Property Name="ID_ADMIN_FK" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TABGameObject">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ID_CATEGORY_FK" Type="int" Nullable="false" />
+          <Property Name="Image" Type="varchar(max)" />
+          <Property Name="Description" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="TABGenerate">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Quantity" Type="int" Nullable="false" />
+          <Property Name="Time" Type="int" Nullable="false" />
+          <Property Name="ID_RESOURCE_FK" Type="int" Nullable="false" />
+          <Property Name="ID_GAME_OBJECT_FK" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TABGroup">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ID_GAME_FK" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TABGroupMessage">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID_PLAYER_FK" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="ID_GROUP_FK" Type="int" Nullable="false" />
+          <Property Name="Text" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Date" Type="timestamp" StoreGeneratedPattern="Computed" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TABGroupPlayer">
+          <Key>
+            <PropertyRef Name="ID_PLAYER_FK" />
+          </Key>
+          <Property Name="ID_PLAYER_FK" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="ID_GROUP_FK" Type="int" Nullable="false" />
+          <Property Name="Admin" Type="tinyint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TABHoldGameObject">
+          <Key>
+            <PropertyRef Name="ID_EVENT_FK" />
+            <PropertyRef Name="ID_GAMEOBJECT_FK" />
+          </Key>
+          <Property Name="ID_EVENT_FK" Type="int" Nullable="false" />
+          <Property Name="ID_GAMEOBJECT_FK" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TABInitialGameObject">
+          <Key>
+            <PropertyRef Name="ID_GAMEOBJECT_FK" />
+            <PropertyRef Name="ID_GAME_FK" />
+          </Key>
+          <Property Name="ID_GAMEOBJECT_FK" Type="int" Nullable="false" />
+          <Property Name="ID_GAME_FK" Type="int" Nullable="false" />
+          <Property Name="Quantity" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TABInitialResource">
+          <Key>
+            <PropertyRef Name="ID_RESOURCE_FK" />
+            <PropertyRef Name="ID_GAME_FK" />
+          </Key>
+          <Property Name="ID_RESOURCE_FK" Type="int" Nullable="false" />
+          <Property Name="ID_GAME_FK" Type="int" Nullable="false" />
+          <Property Name="Quantity" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TABNotification">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="255" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="ID_PLAYER_FK" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="hasRead" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TABPlayer">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Nick" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Pass" Type="nvarchar(max)" />
+          <Property Name="Email" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Picture" Type="varchar" MaxLength="50" />
+          <Property Name="TokenFacebook" Type="varchar(max)" />
+          <Property Name="TokenGoogle" Type="varchar(max)" />
+          <Property Name="ID_GAME_FK" Type="int" />
+        </EntityType>
+        <EntityType Name="TABResource">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Image" Type="varchar(max)" Nullable="false" />
+          <Property Name="ID_GAME_FK" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_TABActionConfig_TABGame">
+          <End Role="TABGame" Type="Self.TABGame" Multiplicity="1" />
+          <End Role="TABActionConfig" Type="Self.TABActionConfig" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TABGame">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TABActionConfig">
+              <PropertyRef Name="ID_GAME_FK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TABActionConfig_TABGameObject">
+          <End Role="TABGameObject" Type="Self.TABGameObject" Multiplicity="1" />
+          <End Role="TABActionConfig" Type="Self.TABActionConfig" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TABGameObject">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TABActionConfig">
+              <PropertyRef Name="ID_GAMEOBJECT" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TABActionConfigDepends_TABActionConfig">
+          <End Role="TABActionConfig" Type="Self.TABActionConfig" Multiplicity="1" />
+          <End Role="TABActionConfigDepends" Type="Self.TABActionConfigDepends" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TABActionConfig">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TABActionConfigDepends">
+              <PropertyRef Name="ID_ACTIONCONFIG" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TABActionConfigDepends_TABAttribute">
+          <End Role="TABAttribute" Type="Self.TABAttribute" Multiplicity="1" />
+          <End Role="TABActionConfigDepends" Type="Self.TABActionConfigDepends" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TABAttribute">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TABActionConfigDepends">
+              <PropertyRef Name="ID_ATTRIBUTE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TABActionConfigDepends_TABGameObject">
+          <End Role="TABGameObject" Type="Self.TABGameObject" Multiplicity="1" />
+          <End Role="TABActionConfigDepends" Type="Self.TABActionConfigDepends" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TABGameObject">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TABActionConfigDepends">
+              <PropertyRef Name="ID_GAMEOBJECT" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TABAdmin_AspNetUsers">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+          <End Role="TABAdmin" Type="Self.TABAdmin" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TABAdmin">
+              <PropertyRef Name="ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TABAttackConfig_TABGame1">
+          <End Role="TABGame" Type="Self.TABGame" Multiplicity="1" />
+          <End Role="TABAttackConfig" Type="Self.TABAttackConfig" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TABGame">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TABAttackConfig">
+              <PropertyRef Name="ID_GAME_FK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TABAttackGameObject_TABAttackConfig">
+          <End Role="TABAttackConfig" Type="Self.TABAttackConfig" Multiplicity="1" />
+          <End Role="TABAttackGameObject" Type="Self.TABAttackGameObject" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TABAttackConfig">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TABAttackGameObject">
+              <PropertyRef Name="ID_ATTACKCONFIG_FK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TABAttackGameObject_TABGameObject">
+          <End Role="TABGameObject" Type="Self.TABGameObject" Multiplicity="1" />
+          <End Role="TABAttackGameObject" Type="Self.TABAttackGameObject" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TABGameObject">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TABAttackGameObject">
+              <PropertyRef Name="ID_GAMEOBJECT_FK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TABAttribute_TABGameObject">
+          <End Role="TABGameObject" Type="Self.TABGameObject" Multiplicity="1" />
+          <End Role="TABAttribute" Type="Self.TABAttribute" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TABGameObject">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TABAttribute">
+              <PropertyRef Name="ID_GAMEOBJECT_FK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TABCategory_TABGame">
+          <End Role="TABGame" Type="Self.TABGame" Multiplicity="1" />
+          <End Role="TABCategory" Type="Self.TABCategory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TABGame">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TABCategory">
+              <PropertyRef Name="ID_GAME_FK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TABCost_TABGameObject">
+          <End Role="TABGameObject" Type="Self.TABGameObject" Multiplicity="1" />
+          <End Role="TABCost" Type="Self.TABCost" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TABGameObject">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TABCost">
+              <PropertyRef Name="ID_GAMEOBJECT_FK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TABCost_TABResource">
+          <End Role="TABResource" Type="Self.TABResource" Multiplicity="1" />
+          <End Role="TABCost" Type="Self.TABCost" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TABResource">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TABCost">
+              <PropertyRef Name="ID_RESOURCE_FK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TABEvent_TABNotification1">
+          <End Role="TABNotification" Type="Self.TABNotification" Multiplicity="0..1" />
+          <End Role="TABEvent" Type="Self.TABEvent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TABNotification">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TABEvent">
+              <PropertyRef Name="ID_NOTIFICATION_FK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TABGame_TABAdmin">
+          <End Role="TABAdmin" Type="Self.TABAdmin" Multiplicity="1" />
+          <End Role="TABGame" Type="Self.TABGame" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TABAdmin">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TABGame">
+              <PropertyRef Name="ID_ADMIN_FK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TABGameObject_TABCategory">
+          <End Role="TABCategory" Type="Self.TABCategory" Multiplicity="1" />
+          <End Role="TABGameObject" Type="Self.TABGameObject" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TABCategory">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TABGameObject">
+              <PropertyRef Name="ID_CATEGORY_FK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TABGenerate_TABGameObject">
+          <End Role="TABGameObject" Type="Self.TABGameObject" Multiplicity="1" />
+          <End Role="TABGenerate" Type="Self.TABGenerate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TABGameObject">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TABGenerate">
+              <PropertyRef Name="ID_GAME_OBJECT_FK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TABGenerate_TABResource">
+          <End Role="TABResource" Type="Self.TABResource" Multiplicity="1" />
+          <End Role="TABGenerate" Type="Self.TABGenerate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TABResource">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TABGenerate">
+              <PropertyRef Name="ID_RESOURCE_FK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TABGroup_TABGame">
+          <End Role="TABGame" Type="Self.TABGame" Multiplicity="1" />
+          <End Role="TABGroup" Type="Self.TABGroup" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TABGame">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TABGroup">
+              <PropertyRef Name="ID_GAME_FK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TABGroupMessage_TABGroup">
+          <End Role="TABGroup" Type="Self.TABGroup" Multiplicity="1" />
+          <End Role="TABGroupMessage" Type="Self.TABGroupMessage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TABGroup">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TABGroupMessage">
+              <PropertyRef Name="ID_GROUP_FK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TABGroupMessage_TABPlayer">
+          <End Role="TABPlayer" Type="Self.TABPlayer" Multiplicity="1" />
+          <End Role="TABGroupMessage" Type="Self.TABGroupMessage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TABPlayer">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TABGroupMessage">
+              <PropertyRef Name="ID_PLAYER_FK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TABGroupPlayer_TABGroup">
+          <End Role="TABGroup" Type="Self.TABGroup" Multiplicity="1" />
+          <End Role="TABGroupPlayer" Type="Self.TABGroupPlayer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TABGroup">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TABGroupPlayer">
+              <PropertyRef Name="ID_GROUP_FK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TABGroupPlayer_TABPlayer">
+          <End Role="TABPlayer" Type="Self.TABPlayer" Multiplicity="1" />
+          <End Role="TABGroupPlayer" Type="Self.TABGroupPlayer" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="TABPlayer">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TABGroupPlayer">
+              <PropertyRef Name="ID_PLAYER_FK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TABHoldGameObject_TABEvent">
+          <End Role="TABEvent" Type="Self.TABEvent" Multiplicity="1" />
+          <End Role="TABHoldGameObject" Type="Self.TABHoldGameObject" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TABEvent">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TABHoldGameObject">
+              <PropertyRef Name="ID_EVENT_FK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TABHoldGameObject_TABGameObject">
+          <End Role="TABGameObject" Type="Self.TABGameObject" Multiplicity="1" />
+          <End Role="TABHoldGameObject" Type="Self.TABHoldGameObject" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TABGameObject">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TABHoldGameObject">
+              <PropertyRef Name="ID_GAMEOBJECT_FK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TABInitialGameObject_TABGame">
+          <End Role="TABGame" Type="Self.TABGame" Multiplicity="1" />
+          <End Role="TABInitialGameObject" Type="Self.TABInitialGameObject" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TABGame">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TABInitialGameObject">
+              <PropertyRef Name="ID_GAME_FK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TABInitialGameObject_TABGameObject">
+          <End Role="TABGameObject" Type="Self.TABGameObject" Multiplicity="1" />
+          <End Role="TABInitialGameObject" Type="Self.TABInitialGameObject" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TABGameObject">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TABInitialGameObject">
+              <PropertyRef Name="ID_GAMEOBJECT_FK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TABInitialResource_TABGame">
+          <End Role="TABGame" Type="Self.TABGame" Multiplicity="1" />
+          <End Role="TABInitialResource" Type="Self.TABInitialResource" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TABGame">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TABInitialResource">
+              <PropertyRef Name="ID_GAME_FK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TABInitialResource_TABResource">
+          <End Role="TABResource" Type="Self.TABResource" Multiplicity="1" />
+          <End Role="TABInitialResource" Type="Self.TABInitialResource" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TABResource">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TABInitialResource">
+              <PropertyRef Name="ID_RESOURCE_FK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TABNotification_TABPlayer">
+          <End Role="TABPlayer" Type="Self.TABPlayer" Multiplicity="1" />
+          <End Role="TABNotification" Type="Self.TABNotification" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TABPlayer">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TABNotification">
+              <PropertyRef Name="ID_PLAYER_FK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TABPlayer_TABGame">
+          <End Role="TABGame" Type="Self.TABGame" Multiplicity="0..1" />
+          <End Role="TABPlayer" Type="Self.TABPlayer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TABGame">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TABPlayer">
+              <PropertyRef Name="ID_GAME_FK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TABResource_TABGame">
+          <End Role="TABGame" Type="Self.TABGame" Multiplicity="1" />
+          <End Role="TABResource" Type="Self.TABResource" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TABGame">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TABResource">
+              <PropertyRef Name="ID_GAME_FK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ResourceModelStoreContainer">
+          <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TABActionConfig" EntityType="Self.TABActionConfig" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TABActionConfigDepends" EntityType="Self.TABActionConfigDepends" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TABAdmin" EntityType="Self.TABAdmin" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TABAttackConfig" EntityType="Self.TABAttackConfig" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TABAttackGameObject" EntityType="Self.TABAttackGameObject" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TABAttribute" EntityType="Self.TABAttribute" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TABCategory" EntityType="Self.TABCategory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TABCost" EntityType="Self.TABCost" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TABEvent" EntityType="Self.TABEvent" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TABGame" EntityType="Self.TABGame" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TABGameObject" EntityType="Self.TABGameObject" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TABGenerate" EntityType="Self.TABGenerate" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TABGroup" EntityType="Self.TABGroup" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TABGroupMessage" EntityType="Self.TABGroupMessage" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TABGroupPlayer" EntityType="Self.TABGroupPlayer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TABHoldGameObject" EntityType="Self.TABHoldGameObject" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TABInitialGameObject" EntityType="Self.TABInitialGameObject" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TABInitialResource" EntityType="Self.TABInitialResource" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TABNotification" EntityType="Self.TABNotification" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TABPlayer" EntityType="Self.TABPlayer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TABResource" EntityType="Self.TABResource" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_TABActionConfig_TABGame" Association="Self.FK_TABActionConfig_TABGame">
+            <End Role="TABGame" EntitySet="TABGame" />
+            <End Role="TABActionConfig" EntitySet="TABActionConfig" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TABActionConfig_TABGameObject" Association="Self.FK_TABActionConfig_TABGameObject">
+            <End Role="TABGameObject" EntitySet="TABGameObject" />
+            <End Role="TABActionConfig" EntitySet="TABActionConfig" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TABActionConfigDepends_TABActionConfig" Association="Self.FK_TABActionConfigDepends_TABActionConfig">
+            <End Role="TABActionConfig" EntitySet="TABActionConfig" />
+            <End Role="TABActionConfigDepends" EntitySet="TABActionConfigDepends" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TABActionConfigDepends_TABAttribute" Association="Self.FK_TABActionConfigDepends_TABAttribute">
+            <End Role="TABAttribute" EntitySet="TABAttribute" />
+            <End Role="TABActionConfigDepends" EntitySet="TABActionConfigDepends" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TABActionConfigDepends_TABGameObject" Association="Self.FK_TABActionConfigDepends_TABGameObject">
+            <End Role="TABGameObject" EntitySet="TABGameObject" />
+            <End Role="TABActionConfigDepends" EntitySet="TABActionConfigDepends" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TABAdmin_AspNetUsers" Association="Self.FK_TABAdmin_AspNetUsers">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="TABAdmin" EntitySet="TABAdmin" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TABAttackConfig_TABGame1" Association="Self.FK_TABAttackConfig_TABGame1">
+            <End Role="TABGame" EntitySet="TABGame" />
+            <End Role="TABAttackConfig" EntitySet="TABAttackConfig" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TABAttackGameObject_TABAttackConfig" Association="Self.FK_TABAttackGameObject_TABAttackConfig">
+            <End Role="TABAttackConfig" EntitySet="TABAttackConfig" />
+            <End Role="TABAttackGameObject" EntitySet="TABAttackGameObject" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TABAttackGameObject_TABGameObject" Association="Self.FK_TABAttackGameObject_TABGameObject">
+            <End Role="TABGameObject" EntitySet="TABGameObject" />
+            <End Role="TABAttackGameObject" EntitySet="TABAttackGameObject" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TABAttribute_TABGameObject" Association="Self.FK_TABAttribute_TABGameObject">
+            <End Role="TABGameObject" EntitySet="TABGameObject" />
+            <End Role="TABAttribute" EntitySet="TABAttribute" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TABCategory_TABGame" Association="Self.FK_TABCategory_TABGame">
+            <End Role="TABGame" EntitySet="TABGame" />
+            <End Role="TABCategory" EntitySet="TABCategory" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TABCost_TABGameObject" Association="Self.FK_TABCost_TABGameObject">
+            <End Role="TABGameObject" EntitySet="TABGameObject" />
+            <End Role="TABCost" EntitySet="TABCost" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TABCost_TABResource" Association="Self.FK_TABCost_TABResource">
+            <End Role="TABResource" EntitySet="TABResource" />
+            <End Role="TABCost" EntitySet="TABCost" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TABEvent_TABNotification1" Association="Self.FK_TABEvent_TABNotification1">
+            <End Role="TABNotification" EntitySet="TABNotification" />
+            <End Role="TABEvent" EntitySet="TABEvent" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TABGame_TABAdmin" Association="Self.FK_TABGame_TABAdmin">
+            <End Role="TABAdmin" EntitySet="TABAdmin" />
+            <End Role="TABGame" EntitySet="TABGame" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TABGameObject_TABCategory" Association="Self.FK_TABGameObject_TABCategory">
+            <End Role="TABCategory" EntitySet="TABCategory" />
+            <End Role="TABGameObject" EntitySet="TABGameObject" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TABGenerate_TABGameObject" Association="Self.FK_TABGenerate_TABGameObject">
+            <End Role="TABGameObject" EntitySet="TABGameObject" />
+            <End Role="TABGenerate" EntitySet="TABGenerate" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TABGenerate_TABResource" Association="Self.FK_TABGenerate_TABResource">
+            <End Role="TABResource" EntitySet="TABResource" />
+            <End Role="TABGenerate" EntitySet="TABGenerate" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TABGroup_TABGame" Association="Self.FK_TABGroup_TABGame">
+            <End Role="TABGame" EntitySet="TABGame" />
+            <End Role="TABGroup" EntitySet="TABGroup" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TABGroupMessage_TABGroup" Association="Self.FK_TABGroupMessage_TABGroup">
+            <End Role="TABGroup" EntitySet="TABGroup" />
+            <End Role="TABGroupMessage" EntitySet="TABGroupMessage" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TABGroupMessage_TABPlayer" Association="Self.FK_TABGroupMessage_TABPlayer">
+            <End Role="TABPlayer" EntitySet="TABPlayer" />
+            <End Role="TABGroupMessage" EntitySet="TABGroupMessage" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TABGroupPlayer_TABGroup" Association="Self.FK_TABGroupPlayer_TABGroup">
+            <End Role="TABGroup" EntitySet="TABGroup" />
+            <End Role="TABGroupPlayer" EntitySet="TABGroupPlayer" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TABGroupPlayer_TABPlayer" Association="Self.FK_TABGroupPlayer_TABPlayer">
+            <End Role="TABPlayer" EntitySet="TABPlayer" />
+            <End Role="TABGroupPlayer" EntitySet="TABGroupPlayer" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TABHoldGameObject_TABEvent" Association="Self.FK_TABHoldGameObject_TABEvent">
+            <End Role="TABEvent" EntitySet="TABEvent" />
+            <End Role="TABHoldGameObject" EntitySet="TABHoldGameObject" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TABHoldGameObject_TABGameObject" Association="Self.FK_TABHoldGameObject_TABGameObject">
+            <End Role="TABGameObject" EntitySet="TABGameObject" />
+            <End Role="TABHoldGameObject" EntitySet="TABHoldGameObject" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TABInitialGameObject_TABGame" Association="Self.FK_TABInitialGameObject_TABGame">
+            <End Role="TABGame" EntitySet="TABGame" />
+            <End Role="TABInitialGameObject" EntitySet="TABInitialGameObject" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TABInitialGameObject_TABGameObject" Association="Self.FK_TABInitialGameObject_TABGameObject">
+            <End Role="TABGameObject" EntitySet="TABGameObject" />
+            <End Role="TABInitialGameObject" EntitySet="TABInitialGameObject" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TABInitialResource_TABGame" Association="Self.FK_TABInitialResource_TABGame">
+            <End Role="TABGame" EntitySet="TABGame" />
+            <End Role="TABInitialResource" EntitySet="TABInitialResource" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TABInitialResource_TABResource" Association="Self.FK_TABInitialResource_TABResource">
+            <End Role="TABResource" EntitySet="TABResource" />
+            <End Role="TABInitialResource" EntitySet="TABInitialResource" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TABNotification_TABPlayer" Association="Self.FK_TABNotification_TABPlayer">
+            <End Role="TABPlayer" EntitySet="TABPlayer" />
+            <End Role="TABNotification" EntitySet="TABNotification" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TABPlayer_TABGame" Association="Self.FK_TABPlayer_TABGame">
+            <End Role="TABGame" EntitySet="TABGame" />
+            <End Role="TABPlayer" EntitySet="TABPlayer" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TABResource_TABGame" Association="Self.FK_TABResource_TABGame">
+            <End Role="TABGame" EntitySet="TABGame" />
+            <End Role="TABResource" EntitySet="TABResource" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ResourceModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="TABResource">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="TABCost" Relationship="ResourceModel.FK_TABCost_TABResource" FromRole="TABResource" ToRole="TABCost" />
+          <NavigationProperty Name="TABGenerate" Relationship="ResourceModel.FK_TABGenerate_TABResource" FromRole="TABResource" ToRole="TABGenerate" />
+          <Property Name="Image" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="ID_GAME_FK" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="TABGame" Relationship="ResourceModel.FK_TABResource_TABGame" FromRole="TABResource" ToRole="TABGame" />
+          <NavigationProperty Name="TABInitialResource1" Relationship="ResourceModel.FK_TABInitialResource_TABResource1" FromRole="TABResource" ToRole="TABInitialResource" />
+        </EntityType>
+        <EntityContainer Name="AtlasConexion" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="TABResource" EntityType="Self.TABResource" />
+          <EntitySet Name="TABCategory" EntityType="ResourceModel.TABCategory" />
+          <EntitySet Name="TABAttribute" EntityType="ResourceModel.TABAttribute" />
+          <EntitySet Name="TABCost" EntityType="ResourceModel.TABCost" />
+          <EntitySet Name="TABGenerate" EntityType="ResourceModel.TABGenerate" />
+          <AssociationSet Name="FK_TABCost_TABResource" Association="ResourceModel.FK_TABCost_TABResource">
+            <End Role="TABResource" EntitySet="TABResource" />
+            <End Role="TABCost" EntitySet="TABCost" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TABGenerate_TABResource" Association="ResourceModel.FK_TABGenerate_TABResource">
+            <End Role="TABResource" EntitySet="TABResource" />
+            <End Role="TABGenerate" EntitySet="TABGenerate" />
+          </AssociationSet>
+          <EntitySet Name="TABGameObject" EntityType="ResourceModel.TABGameObject" />
+          <AssociationSet Name="FK_TABAttribute_TABGameObject" Association="ResourceModel.FK_TABAttribute_TABGameObject">
+            <End Role="TABGameObject" EntitySet="TABGameObject" />
+            <End Role="TABAttribute" EntitySet="TABAttribute" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TABGameObject_TABCategory" Association="ResourceModel.FK_TABGameObject_TABCategory">
+            <End Role="TABCategory" EntitySet="TABCategory" />
+            <End Role="TABGameObject" EntitySet="TABGameObject" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TABCost_TABGameObject" Association="ResourceModel.FK_TABCost_TABGameObject">
+            <End Role="TABGameObject" EntitySet="TABGameObject" />
+            <End Role="TABCost" EntitySet="TABCost" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TABGenerate_TABGameObject" Association="ResourceModel.FK_TABGenerate_TABGameObject">
+            <End Role="TABGameObject" EntitySet="TABGameObject" />
+            <End Role="TABGenerate" EntitySet="TABGenerate" />
+          </AssociationSet>
+          <EntitySet Name="TABAdmin" EntityType="ResourceModel.TABAdmin" />
+          <EntitySet Name="TABGame" EntityType="ResourceModel.TABGame" />
+          <EntitySet Name="TABPlayer" EntityType="ResourceModel.TABPlayer" />
+          <AssociationSet Name="FK_TABGame_TABAdmin" Association="ResourceModel.FK_TABGame_TABAdmin">
+            <End Role="TABAdmin" EntitySet="TABAdmin" />
+            <End Role="TABGame" EntitySet="TABGame" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TABCategory_TABGame" Association="ResourceModel.FK_TABCategory_TABGame">
+            <End Role="TABGame" EntitySet="TABGame" />
+            <End Role="TABCategory" EntitySet="TABCategory" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TABPlayer_TABGame" Association="ResourceModel.FK_TABPlayer_TABGame">
+            <End Role="TABGame" EntitySet="TABGame" />
+            <End Role="TABPlayer" EntitySet="TABPlayer" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TABResource_TABGame" Association="ResourceModel.FK_TABResource_TABGame">
+            <End Role="TABGame" EntitySet="TABGame" />
+            <End Role="TABResource" EntitySet="TABResource" />
+          </AssociationSet>
+          <EntitySet Name="AspNetUsers" EntityType="ResourceModel.AspNetUsers" />
+          <AssociationSet Name="FK_TABAdmin_TABAdmin" Association="ResourceModel.FK_TABAdmin_TABAdmin">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="TABAdmin" EntitySet="TABAdmin" />
+          </AssociationSet>
+          <EntitySet Name="TABEvent" EntityType="ResourceModel.TABEvent" />
+          <EntitySet Name="TABNotification" EntityType="ResourceModel.TABNotification" />
+          <AssociationSet Name="FK_TABEvent_TABNotification1" Association="ResourceModel.FK_TABEvent_TABNotification1">
+            <End Role="TABNotification" EntitySet="TABNotification" />
+            <End Role="TABEvent" EntitySet="TABEvent" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TABNotification_TABPlayer" Association="ResourceModel.FK_TABNotification_TABPlayer">
+            <End Role="TABPlayer" EntitySet="TABPlayer" />
+            <End Role="TABNotification" EntitySet="TABNotification" />
+          </AssociationSet>
+          <AssociationSet Name="TABHoldGameObject" Association="ResourceModel.TABHoldGameObject">
+            <End Role="TABEvent" EntitySet="TABEvent" />
+            <End Role="TABGameObject" EntitySet="TABGameObject" />
+          </AssociationSet>
+          <EntitySet Name="TABInitialGameObject" EntityType="ResourceModel.TABInitialGameObject" />
+          <EntitySet Name="TABInitialResource" EntityType="ResourceModel.TABInitialResource" />
+          <EntitySet Name="TABActionConfig" EntityType="ResourceModel.TABActionConfig" />
+          <EntitySet Name="TABActionConfigDepends" EntityType="ResourceModel.TABActionConfigDepends" />
+          <AssociationSet Name="FK_TABActionConfig_TABGame" Association="ResourceModel.FK_TABActionConfig_TABGame">
+            <End Role="TABGame" EntitySet="TABGame" />
+            <End Role="TABActionConfig" EntitySet="TABActionConfig" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TABActionConfigDepends_TABActionConfig" Association="ResourceModel.FK_TABActionConfigDepends_TABActionConfig">
+            <End Role="TABActionConfig" EntitySet="TABActionConfig" />
+            <End Role="TABActionConfigDepends" EntitySet="TABActionConfigDepends" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TABActionConfigDepends_TABAttribute1" Association="ResourceModel.FK_TABActionConfigDepends_TABAttribute1">
+            <End Role="TABAttribute" EntitySet="TABAttribute" />
+            <End Role="TABActionConfigDepends" EntitySet="TABActionConfigDepends" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TABActionConfigDepends_TABGameObject" Association="ResourceModel.FK_TABActionConfigDepends_TABGameObject">
+            <End Role="TABGameObject" EntitySet="TABGameObject" />
+            <End Role="TABActionConfigDepends" EntitySet="TABActionConfigDepends" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TABInitialGameObject_TABGame" Association="ResourceModel.FK_TABInitialGameObject_TABGame">
+            <End Role="TABGame" EntitySet="TABGame" />
+            <End Role="TABInitialGameObject" EntitySet="TABInitialGameObject" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TABInitialResource_TABGame" Association="ResourceModel.FK_TABInitialResource_TABGame">
+            <End Role="TABGame" EntitySet="TABGame" />
+            <End Role="TABInitialResource" EntitySet="TABInitialResource" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TABInitialGameObject_TABGameObject2" Association="ResourceModel.FK_TABInitialGameObject_TABGameObject2">
+            <End Role="TABInitialGameObject" EntitySet="TABInitialGameObject" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TABInitialResource_TABResource1" Association="ResourceModel.FK_TABInitialResource_TABResource1">
+            <End Role="TABResource" EntitySet="TABResource" />
+            <End Role="TABInitialResource" EntitySet="TABInitialResource" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TABActionConfig_TABGameObject" Association="ResourceModel.FK_TABActionConfig_TABGameObject">
+            <End Role="TABGameObject" EntitySet="TABGameObject" />
+            <End Role="TABActionConfig" EntitySet="TABActionConfig" />
+          </AssociationSet>
+          <EntitySet Name="TABAttackConfig1Set" EntityType="ResourceModel.TABAttackConfig1" />
+          <AssociationSet Name="FK_TABAttackConfig_TABGame1" Association="ResourceModel.FK_TABAttackConfig_TABGame1">
+            <End Role="TABGame" EntitySet="TABGame" />
+            <End Role="TABAttackConfig1" EntitySet="TABAttackConfig1Set" />
+          </AssociationSet>
+          <AssociationSet Name="TABAttackGameObject" Association="ResourceModel.TABAttackGameObject">
+            <End Role="TABAttackConfig1" EntitySet="TABAttackConfig1Set" />
+            <End Role="TABGameObject" EntitySet="TABGameObject" />
+          </AssociationSet>
+          <EntitySet Name="TABGroup" EntityType="ResourceModel.TABGroup" />
+          <EntitySet Name="TABGroupMessage" EntityType="ResourceModel.TABGroupMessage" />
+          <EntitySet Name="TABGroupPlayer" EntityType="ResourceModel.TABGroupPlayer" />
+          <AssociationSet Name="FK_TABGroup_TABGame" Association="ResourceModel.FK_TABGroup_TABGame">
+            <End Role="TABGame" EntitySet="TABGame" />
+            <End Role="TABGroup" EntitySet="TABGroup" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TABGroupMessage_TABGroup" Association="ResourceModel.FK_TABGroupMessage_TABGroup">
+            <End Role="TABGroup" EntitySet="TABGroup" />
+            <End Role="TABGroupMessage" EntitySet="TABGroupMessage" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TABGroupPlayer_TABGroup" Association="ResourceModel.FK_TABGroupPlayer_TABGroup">
+            <End Role="TABGroup" EntitySet="TABGroup" />
+            <End Role="TABGroupPlayer" EntitySet="TABGroupPlayer" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TABGroupMessage_TABPlayer" Association="ResourceModel.FK_TABGroupMessage_TABPlayer">
+            <End Role="TABPlayer" EntitySet="TABPlayer" />
+            <End Role="TABGroupMessage" EntitySet="TABGroupMessage" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TABGroupPlayer_TABPlayer" Association="ResourceModel.FK_TABGroupPlayer_TABPlayer">
+            <End Role="TABPlayer" EntitySet="TABPlayer" />
+            <End Role="TABGroupPlayer" EntitySet="TABGroupPlayer" />
+          </AssociationSet>
+          </EntityContainer>
+        <EntityType Name="TABCategory">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ToolTip" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Image" Type="String" MaxLength="Max" Unicode="false" FixedLength="false" Nullable="false" />
+          <NavigationProperty Name="TABGameObject" Relationship="ResourceModel.FK_TABGameObject_TABCategory" FromRole="TABCategory" ToRole="TABGameObject" />
+          <Property Name="ID_GAME_FK" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="TABGame" Relationship="ResourceModel.FK_TABCategory_TABGame" FromRole="TABCategory" ToRole="TABGame" />
+        </EntityType>
+        <EntityType Name="TABAttribute">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Value" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Type" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ID_GAMEOBJECT_FK" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="TABGameObject" Relationship="ResourceModel.FK_TABAttribute_TABGameObject" FromRole="TABAttribute" ToRole="TABGameObject" />
+          <NavigationProperty Name="TABActionConfigDepends" Relationship="ResourceModel.FK_TABActionConfigDepends_TABAttribute1" FromRole="TABAttribute" ToRole="TABActionConfigDepends" />
+        </EntityType>
+        <EntityType Name="TABCost">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="Quantity" Type="Int32" Nullable="false" />
+          <Property Name="ID_RESOURCE_FK" Type="Int32" Nullable="false" />
+          <Property Name="ID_GAMEOBJECT_FK" Type="Int32" Nullable="false" />
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="TABResource" Relationship="ResourceModel.FK_TABCost_TABResource" FromRole="TABCost" ToRole="TABResource" />
+          <NavigationProperty Name="TABGameObject" Relationship="ResourceModel.FK_TABCost_TABGameObject" FromRole="TABCost" ToRole="TABGameObject" />
+        </EntityType>
+        <EntityType Name="TABGenerate">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Quantity" Type="Int32" Nullable="false" />
+          <Property Name="Time" Type="Int32" Nullable="false" />
+          <Property Name="ID_RESOURCE_FK" Type="Int32" Nullable="false" />
+          <Property Name="ID_GAME_OBJECT_FK" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="TABResource" Relationship="ResourceModel.FK_TABGenerate_TABResource" FromRole="TABGenerate" ToRole="TABResource" />
+          <NavigationProperty Name="TABGameObject" Relationship="ResourceModel.FK_TABGenerate_TABGameObject" FromRole="TABGenerate" ToRole="TABGameObject" />
+        </EntityType>
+        <Association Name="FK_TABCost_TABResource">
+          <End Type="ResourceModel.TABResource" Role="TABResource" Multiplicity="1" />
+          <End Type="ResourceModel.TABCost" Role="TABCost" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TABResource">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TABCost">
+              <PropertyRef Name="ID_RESOURCE_FK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TABGenerate_TABResource">
+          <End Type="ResourceModel.TABResource" Role="TABResource" Multiplicity="1" />
+          <End Type="ResourceModel.TABGenerate" Role="TABGenerate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TABResource">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TABGenerate">
+              <PropertyRef Name="ID_RESOURCE_FK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="TABGameObject">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ID_CATEGORY_FK" Type="Int32" Nullable="false" />
+          <Property Name="Image" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="TABAttribute" Relationship="ResourceModel.FK_TABAttribute_TABGameObject" FromRole="TABGameObject" ToRole="TABAttribute" />
+          <NavigationProperty Name="TABCategory" Relationship="ResourceModel.FK_TABGameObject_TABCategory" FromRole="TABGameObject" ToRole="TABCategory" />
+          <NavigationProperty Name="TABCost" Relationship="ResourceModel.FK_TABCost_TABGameObject" FromRole="TABGameObject" ToRole="TABCost" />
+          <NavigationProperty Name="TABGenerate" Relationship="ResourceModel.FK_TABGenerate_TABGameObject" FromRole="TABGameObject" ToRole="TABGenerate" />
+          <NavigationProperty Name="TABEvent" Relationship="ResourceModel.TABHoldGameObject" FromRole="TABGameObject" ToRole="TABEvent" />
+          <NavigationProperty Name="TABActionConfigDepends" Relationship="ResourceModel.FK_TABActionConfigDepends_TABGameObject" FromRole="TABGameObject" ToRole="TABActionConfigDepends" />
+          <NavigationProperty Name="TABInitialGameObject2" Relationship="ResourceModel.FK_TABInitialGameObject_TABGameObject2" FromRole="TABGameObject" ToRole="TABInitialGameObject" />
+          <NavigationProperty Name="TABActionConfig" Relationship="ResourceModel.FK_TABActionConfig_TABGameObject" FromRole="TABGameObject" ToRole="TABActionConfig" />
+          <NavigationProperty Name="TABAttackConfig" Relationship="ResourceModel.TABAttackGameObject" FromRole="TABGameObject" ToRole="TABAttackConfig1" />
+        </EntityType>
+        <Association Name="FK_TABAttribute_TABGameObject">
+          <End Type="ResourceModel.TABGameObject" Role="TABGameObject" Multiplicity="1" />
+          <End Type="ResourceModel.TABAttribute" Role="TABAttribute" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TABGameObject">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TABAttribute">
+              <PropertyRef Name="ID_GAMEOBJECT_FK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TABGameObject_TABCategory">
+          <End Type="ResourceModel.TABCategory" Role="TABCategory" Multiplicity="1" />
+          <End Type="ResourceModel.TABGameObject" Role="TABGameObject" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TABCategory">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TABGameObject">
+              <PropertyRef Name="ID_CATEGORY_FK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TABCost_TABGameObject">
+          <End Type="ResourceModel.TABGameObject" Role="TABGameObject" Multiplicity="1" />
+          <End Type="ResourceModel.TABCost" Role="TABCost" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TABGameObject">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TABCost">
+              <PropertyRef Name="ID_GAMEOBJECT_FK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TABGenerate_TABGameObject">
+          <End Type="ResourceModel.TABGameObject" Role="TABGameObject" Multiplicity="1" />
+          <End Type="ResourceModel.TABGenerate" Role="TABGenerate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TABGameObject">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TABGenerate">
+              <PropertyRef Name="ID_GAME_OBJECT_FK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="TABAdmin">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="String" Nullable="false" annotation:StoreGeneratedPattern="Identity" MaxLength="128" Unicode="true" FixedLength="false" />
+          <Property Name="Nick" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Pass" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Picture" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="TABGame" Relationship="ResourceModel.FK_TABGame_TABAdmin" FromRole="TABAdmin" ToRole="TABGame" />
+          <NavigationProperty Name="AspNetUsers" Relationship="ResourceModel.FK_TABAdmin_TABAdmin" FromRole="TABAdmin" ToRole="AspNetUsers" />
+        </EntityType>
+        <EntityType Name="TABGame">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Dominio" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="CSS" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Estado" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FacebookAppID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FacebookAuth" Type="Byte" />
+          <Property Name="FacebookAppSecret" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="GoogleClientID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="GoogleClientSecret" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ID_ADMIN_FK" Type="String" Nullable="false" MaxLength="128" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="TABAdmin" Relationship="ResourceModel.FK_TABGame_TABAdmin" FromRole="TABGame" ToRole="TABAdmin" />
+          <NavigationProperty Name="TABCategory" Relationship="ResourceModel.FK_TABCategory_TABGame" FromRole="TABGame" ToRole="TABCategory" />
+          <NavigationProperty Name="TABPlayer" Relationship="ResourceModel.FK_TABPlayer_TABGame" FromRole="TABGame" ToRole="TABPlayer" />
+          <NavigationProperty Name="TABResource" Relationship="ResourceModel.FK_TABResource_TABGame" FromRole="TABGame" ToRole="TABResource" />
+          <NavigationProperty Name="TABActionConfig" Relationship="ResourceModel.FK_TABActionConfig_TABGame" FromRole="TABGame" ToRole="TABActionConfig" />
+          <NavigationProperty Name="TABInitialGameObject" Relationship="ResourceModel.FK_TABInitialGameObject_TABGame" FromRole="TABGame" ToRole="TABInitialGameObject" />
+          <NavigationProperty Name="TABInitialResource" Relationship="ResourceModel.FK_TABInitialResource_TABGame" FromRole="TABGame" ToRole="TABInitialResource" />
+          <Property Name="Logo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="TABAttackConfig" Relationship="ResourceModel.FK_TABAttackConfig_TABGame1" FromRole="TABGame" ToRole="TABAttackConfig1" />
+          <NavigationProperty Name="TABGroup" Relationship="ResourceModel.FK_TABGroup_TABGame" FromRole="TABGame" ToRole="TABGroup" />
+        </EntityType>
+        <EntityType Name="TABPlayer">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="String" Nullable="false" annotation:StoreGeneratedPattern="None" MaxLength="128" Unicode="true" FixedLength="false" />
+          <Property Name="Nick" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Pass" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Picture" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="TokenFacebook" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="TokenGoogle" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="ID_GAME_FK" Type="Int32" />
+          <NavigationProperty Name="TABGame" Relationship="ResourceModel.FK_TABPlayer_TABGame" FromRole="TABPlayer" ToRole="TABGame" />
+          <NavigationProperty Name="TABNotification" Relationship="ResourceModel.FK_TABNotification_TABPlayer" FromRole="TABPlayer" ToRole="TABNotification" />
+          <NavigationProperty Name="TABGroupMessage" Relationship="ResourceModel.FK_TABGroupMessage_TABPlayer" FromRole="TABPlayer" ToRole="TABGroupMessage" />
+          <NavigationProperty Name="TABGroupPlayer" Relationship="ResourceModel.FK_TABGroupPlayer_TABPlayer" FromRole="TABPlayer" ToRole="TABGroupPlayer" />
+        </EntityType>
+        <Association Name="FK_TABGame_TABAdmin">
+          <End Type="ResourceModel.TABAdmin" Role="TABAdmin" Multiplicity="1" />
+          <End Type="ResourceModel.TABGame" Role="TABGame" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TABAdmin">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TABGame">
+              <PropertyRef Name="ID_ADMIN_FK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TABCategory_TABGame">
+          <End Type="ResourceModel.TABGame" Role="TABGame" Multiplicity="1" />
+          <End Type="ResourceModel.TABCategory" Role="TABCategory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TABGame">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TABCategory">
+              <PropertyRef Name="ID_GAME_FK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TABPlayer_TABGame">
+          <End Type="ResourceModel.TABGame" Role="TABGame" Multiplicity="0..1" />
+          <End Type="ResourceModel.TABPlayer" Role="TABPlayer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TABGame">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TABPlayer">
+              <PropertyRef Name="ID_GAME_FK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TABResource_TABGame">
+          <End Type="ResourceModel.TABGame" Role="TABGame" Multiplicity="1" />
+          <End Type="ResourceModel.TABResource" Role="TABResource" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TABGame">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TABResource">
+              <PropertyRef Name="ID_GAME_FK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="AspNetUsers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="EmailConfirmed" Type="Boolean" Nullable="false" />
+          <Property Name="PasswordHash" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SecurityStamp" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumberConfirmed" Type="Boolean" Nullable="false" />
+          <Property Name="TwoFactorEnabled" Type="Boolean" Nullable="false" />
+          <Property Name="LockoutEndDateUtc" Type="DateTime" Precision="3" />
+          <Property Name="LockoutEnabled" Type="Boolean" Nullable="false" />
+          <Property Name="AccessFailedCount" Type="Int32" Nullable="false" />
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="TABAdmin" Relationship="ResourceModel.FK_TABAdmin_TABAdmin" FromRole="AspNetUsers" ToRole="TABAdmin" />
+        </EntityType>
+        <Association Name="FK_TABAdmin_TABAdmin">
+          <End Type="ResourceModel.AspNetUsers" Role="AspNetUsers" Multiplicity="1" />
+          <End Type="ResourceModel.TABAdmin" Role="TABAdmin" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TABAdmin">
+              <PropertyRef Name="ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="TABEvent">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="expiration" Type="DateTime" Precision="7" />
+          <Property Name="ID_NOTIFICATION_FK" Type="Int32" />
+          <NavigationProperty Name="TABNotification" Relationship="ResourceModel.FK_TABEvent_TABNotification1" FromRole="TABEvent" ToRole="TABNotification" />
+          <NavigationProperty Name="TABGameObject" Relationship="ResourceModel.TABHoldGameObject" FromRole="TABEvent" ToRole="TABGameObject" />
+        </EntityType>
+        <EntityType Name="TABNotification">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ID_PLAYER_FK" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="hasRead" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="TABEvent" Relationship="ResourceModel.FK_TABEvent_TABNotification1" FromRole="TABNotification" ToRole="TABEvent" />
+          <NavigationProperty Name="TABPlayer" Relationship="ResourceModel.FK_TABNotification_TABPlayer" FromRole="TABNotification" ToRole="TABPlayer" />
+        </EntityType>
+        <Association Name="FK_TABEvent_TABNotification1">
+          <End Type="ResourceModel.TABNotification" Role="TABNotification" Multiplicity="0..1" />
+          <End Type="ResourceModel.TABEvent" Role="TABEvent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TABNotification">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TABEvent">
+              <PropertyRef Name="ID_NOTIFICATION_FK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TABNotification_TABPlayer">
+          <End Type="ResourceModel.TABPlayer" Role="TABPlayer" Multiplicity="1" />
+          <End Type="ResourceModel.TABNotification" Role="TABNotification" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TABPlayer">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TABNotification">
+              <PropertyRef Name="ID_PLAYER_FK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="TABHoldGameObject">
+          <End Type="ResourceModel.TABEvent" Role="TABEvent" Multiplicity="*" />
+          <End Type="ResourceModel.TABGameObject" Role="TABGameObject" Multiplicity="*" />
+        </Association>
+        <EntityType Name="TABInitialGameObject">
+          <Key>
+            <PropertyRef Name="ID_GAMEOBJECT_FK" />
+            <PropertyRef Name="ID_GAME_FK" />
+          </Key>
+          <Property Name="Quantity" Type="Int32" Nullable="false" />
+          <Property Name="ID_GAMEOBJECT_FK" Type="Int32" Nullable="false" />
+          <Property Name="ID_GAME_FK" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="TABGame" Relationship="ResourceModel.FK_TABInitialGameObject_TABGame" FromRole="TABInitialGameObject" ToRole="TABGame" />
+          <NavigationProperty Name="TABGameObject2" Relationship="ResourceModel.FK_TABInitialGameObject_TABGameObject2" FromRole="TABInitialGameObject" ToRole="TABGameObject" />
+        </EntityType>
+        <EntityType Name="TABInitialResource">
+          <Key>
+            <PropertyRef Name="ID_RESOURCE_FK" />
+            <PropertyRef Name="ID_GAME_FK" />
+          </Key>
+          <Property Name="Quantity" Type="Int32" Nullable="false" />
+          <Property Name="ID_RESOURCE_FK" Type="Int32" Nullable="false" />
+          <Property Name="ID_GAME_FK" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="TABGame" Relationship="ResourceModel.FK_TABInitialResource_TABGame" FromRole="TABInitialResource" ToRole="TABGame" />
+          <NavigationProperty Name="TABResource1" Relationship="ResourceModel.FK_TABInitialResource_TABResource1" FromRole="TABInitialResource" ToRole="TABResource" />
+        </EntityType>
+        <EntityType Name="TABActionConfig" Abstract="true">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ID_GAME_FK" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="TABGame" Relationship="ResourceModel.FK_TABActionConfig_TABGame" FromRole="TABActionConfig" ToRole="TABGame" />
+          <NavigationProperty Name="TABActionConfigDepends" Relationship="ResourceModel.FK_TABActionConfigDepends_TABActionConfig" FromRole="TABActionConfig" ToRole="TABActionConfigDepends" />
+          <Property Name="ID_GAMEOBJECT" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="TABGameObject" Relationship="ResourceModel.FK_TABActionConfig_TABGameObject" FromRole="TABActionConfig" ToRole="TABGameObject" />
+        </EntityType>
+        <EntityType Name="TABActionConfigDepends">
+          <Key>
+            <PropertyRef Name="ID_ACTIONCONFIG" />
+            <PropertyRef Name="ID_GAMEOBJECT" />
+            <PropertyRef Name="ID_ATTRIBUTE" />
+          </Key>
+          <Property Name="ID_ACTIONCONFIG" Type="Int32" Nullable="false" />
+          <Property Name="ID_GAMEOBJECT" Type="Int32" Nullable="false" />
+          <Property Name="ID_ATTRIBUTE" Type="Int32" Nullable="false" />
+          <Property Name="Value" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="TABActionConfig" Relationship="ResourceModel.FK_TABActionConfigDepends_TABActionConfig" FromRole="TABActionConfigDepends" ToRole="TABActionConfig" />
+          <NavigationProperty Name="TABAttribute" Relationship="ResourceModel.FK_TABActionConfigDepends_TABAttribute1" FromRole="TABActionConfigDepends" ToRole="TABAttribute" />
+          <NavigationProperty Name="TABGameObject" Relationship="ResourceModel.FK_TABActionConfigDepends_TABGameObject" FromRole="TABActionConfigDepends" ToRole="TABGameObject" />
+        </EntityType>
+        <Association Name="FK_TABActionConfig_TABGame">
+          <End Type="ResourceModel.TABGame" Role="TABGame" Multiplicity="1" />
+          <End Type="ResourceModel.TABActionConfig" Role="TABActionConfig" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TABGame">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TABActionConfig">
+              <PropertyRef Name="ID_GAME_FK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TABActionConfigDepends_TABActionConfig">
+          <End Type="ResourceModel.TABActionConfig" Role="TABActionConfig" Multiplicity="1" />
+          <End Type="ResourceModel.TABActionConfigDepends" Role="TABActionConfigDepends" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TABActionConfig">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TABActionConfigDepends">
+              <PropertyRef Name="ID_ACTIONCONFIG" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TABActionConfigDepends_TABAttribute1">
+          <End Type="ResourceModel.TABAttribute" Role="TABAttribute" Multiplicity="1" />
+          <End Type="ResourceModel.TABActionConfigDepends" Role="TABActionConfigDepends" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TABAttribute">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TABActionConfigDepends">
+              <PropertyRef Name="ID_ATTRIBUTE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TABActionConfigDepends_TABGameObject">
+          <End Type="ResourceModel.TABGameObject" Role="TABGameObject" Multiplicity="1" />
+          <End Type="ResourceModel.TABActionConfigDepends" Role="TABActionConfigDepends" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TABGameObject">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TABActionConfigDepends">
+              <PropertyRef Name="ID_GAMEOBJECT" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="TABCreateConfig" BaseType="ResourceModel.TABActionConfig" />
+        <EntityType Name="TABLevelUpConfig" BaseType="ResourceModel.TABActionConfig" >
+          <Property Name="LevelUpCostRate" Type="Int32" />
+          <Property Name="LevelUpGenerateRate" Type="Int32" />
+        </EntityType>
+        <EntityType Name="TABDonateConfig" BaseType="ResourceModel.TABActionConfig" />
+        <EntityType Name="TABSellConfig" BaseType="ResourceModel.TABActionConfig" />
+        <Association Name="FK_TABInitialGameObject_TABGame">
+          <End Type="ResourceModel.TABGame" Role="TABGame" Multiplicity="1" />
+          <End Type="ResourceModel.TABInitialGameObject" Role="TABInitialGameObject" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TABGame">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TABInitialGameObject">
+              <PropertyRef Name="ID_GAME_FK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TABInitialResource_TABGame">
+          <End Type="ResourceModel.TABGame" Role="TABGame" Multiplicity="1" />
+          <End Type="ResourceModel.TABInitialResource" Role="TABInitialResource" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TABGame">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TABInitialResource">
+              <PropertyRef Name="ID_GAME_FK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TABInitialGameObject_TABGameObject2">
+          <End Type="ResourceModel.TABGameObject" Role="TABGameObject" Multiplicity="1" />
+          <End Type="ResourceModel.TABInitialGameObject" Role="TABInitialGameObject" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TABGameObject">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TABInitialGameObject">
+              <PropertyRef Name="ID_GAMEOBJECT_FK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TABInitialResource_TABResource1">
+          <End Type="ResourceModel.TABResource" Role="TABResource" Multiplicity="1" />
+          <End Type="ResourceModel.TABInitialResource" Role="TABInitialResource" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TABResource">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TABInitialResource">
+              <PropertyRef Name="ID_RESOURCE_FK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TABActionConfig_TABGameObject">
+          <End Type="ResourceModel.TABGameObject" Role="TABGameObject" Multiplicity="1" />
+          <End Type="ResourceModel.TABActionConfig" Role="TABActionConfig" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TABGameObject">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TABActionConfig">
+              <PropertyRef Name="ID_GAMEOBJECT" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="TABAttackConfig1" Abstract="true">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PercentLoss" Type="Int32" Nullable="false" />
+          <Property Name="PercentGain" Type="Int32" Nullable="false" />
+          <Property Name="ID_GAME_FK" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="TABGame" Relationship="ResourceModel.FK_TABAttackConfig_TABGame1" FromRole="TABAttackConfig1" ToRole="TABGame" />
+          <NavigationProperty Name="TABGameObject" Relationship="ResourceModel.TABAttackGameObject" FromRole="TABAttackConfig1" ToRole="TABGameObject" />
+        </EntityType>
+        <Association Name="FK_TABAttackConfig_TABGame1">
+          <End Type="ResourceModel.TABGame" Role="TABGame" Multiplicity="1" />
+          <End Type="ResourceModel.TABAttackConfig1" Role="TABAttackConfig1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TABGame">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TABAttackConfig1">
+              <PropertyRef Name="ID_GAME_FK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="TABAttackGameObject">
+          <End Type="ResourceModel.TABAttackConfig1" Role="TABAttackConfig1" Multiplicity="*" />
+          <End Type="ResourceModel.TABGameObject" Role="TABGameObject" Multiplicity="*" />
+        </Association>
+        <EntityType Name="SimpleAttack" BaseType="ResourceModel.TABAttackConfig1" />
+        <EntityType Name="GroupAttack" BaseType="ResourceModel.TABAttackConfig1" >
+          <Property Name="MaxPlayers" Type="Int32" />
+        </EntityType>
+        <EntityType Name="TABGroup">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ID_GAME_FK" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="TABGame" Relationship="ResourceModel.FK_TABGroup_TABGame" FromRole="TABGroup" ToRole="TABGame" />
+          <NavigationProperty Name="TABGroupMessage" Relationship="ResourceModel.FK_TABGroupMessage_TABGroup" FromRole="TABGroup" ToRole="TABGroupMessage" />
+          <NavigationProperty Name="TABGroupPlayer" Relationship="ResourceModel.FK_TABGroupPlayer_TABGroup" FromRole="TABGroup" ToRole="TABGroupPlayer" />
+        </EntityType>
+        <EntityType Name="TABGroupMessage">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_PLAYER_FK" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="ID_GROUP_FK" Type="Int32" Nullable="false" />
+          <Property Name="Text" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Date" Type="Binary" Nullable="false" MaxLength="8" FixedLength="true" annotation:StoreGeneratedPattern="Computed" />
+          <NavigationProperty Name="TABGroup" Relationship="ResourceModel.FK_TABGroupMessage_TABGroup" FromRole="TABGroupMessage" ToRole="TABGroup" />
+          <NavigationProperty Name="TABPlayer" Relationship="ResourceModel.FK_TABGroupMessage_TABPlayer" FromRole="TABGroupMessage" ToRole="TABPlayer" />
+        </EntityType>
+        <EntityType Name="TABGroupPlayer">
+          <Key>
+            <PropertyRef Name="ID_PLAYER_FK" />
+          </Key>
+          <Property Name="ID_PLAYER_FK" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="ID_GROUP_FK" Type="Int32" Nullable="false" />
+          <Property Name="Admin" Type="Byte" Nullable="false" />
+          <NavigationProperty Name="TABGroup" Relationship="ResourceModel.FK_TABGroupPlayer_TABGroup" FromRole="TABGroupPlayer" ToRole="TABGroup" />
+          <NavigationProperty Name="TABPlayer" Relationship="ResourceModel.FK_TABGroupPlayer_TABPlayer" FromRole="TABGroupPlayer" ToRole="TABPlayer" />
+        </EntityType>
+        <Association Name="FK_TABGroup_TABGame">
+          <End Type="ResourceModel.TABGame" Role="TABGame" Multiplicity="1" />
+          <End Type="ResourceModel.TABGroup" Role="TABGroup" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TABGame">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TABGroup">
+              <PropertyRef Name="ID_GAME_FK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TABGroupMessage_TABGroup">
+          <End Type="ResourceModel.TABGroup" Role="TABGroup" Multiplicity="1" />
+          <End Type="ResourceModel.TABGroupMessage" Role="TABGroupMessage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TABGroup">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TABGroupMessage">
+              <PropertyRef Name="ID_GROUP_FK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TABGroupPlayer_TABGroup">
+          <End Type="ResourceModel.TABGroup" Role="TABGroup" Multiplicity="1" />
+          <End Type="ResourceModel.TABGroupPlayer" Role="TABGroupPlayer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TABGroup">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TABGroupPlayer">
+              <PropertyRef Name="ID_GROUP_FK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TABGroupMessage_TABPlayer">
+          <End Type="ResourceModel.TABPlayer" Role="TABPlayer" Multiplicity="1" />
+          <End Type="ResourceModel.TABGroupMessage" Role="TABGroupMessage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TABPlayer">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TABGroupMessage">
+              <PropertyRef Name="ID_PLAYER_FK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TABGroupPlayer_TABPlayer">
+          <End Type="ResourceModel.TABPlayer" Role="TABPlayer" Multiplicity="1" />
+          <End Type="ResourceModel.TABGroupPlayer" Role="TABGroupPlayer" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="TABPlayer">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TABGroupPlayer">
+              <PropertyRef Name="ID_PLAYER_FK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="ResourceModelStoreContainer" CdmEntityContainer="AtlasConexion">
+    <EntitySetMapping Name="TABResource">
+      <EntityTypeMapping TypeName="IsTypeOf(ResourceModel.TABResource)">
+        <MappingFragment StoreEntitySet="TABResource">
+                <ScalarProperty Name="ID_GAME_FK" ColumnName="ID_GAME_FK" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TABCategory">
+      <EntityTypeMapping TypeName="IsTypeOf(ResourceModel.TABCategory)">
+        <MappingFragment StoreEntitySet="TABCategory">
+          <ScalarProperty Name="ID_GAME_FK" ColumnName="ID_GAME_FK" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="ToolTip" ColumnName="ToolTip" />
+          <ScalarProperty Name="Image" ColumnName="Image" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+          <EntitySetMapping Name="TABAttribute">
+            <EntityTypeMapping TypeName="ResourceModel.TABAttribute">
+              <MappingFragment StoreEntitySet="TABAttribute">
+                <ScalarProperty Name="ID_GAMEOBJECT_FK" ColumnName="ID_GAMEOBJECT_FK" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Value" ColumnName="Value" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TABCost">
+            <EntityTypeMapping TypeName="ResourceModel.TABCost">
+              <MappingFragment StoreEntitySet="TABCost">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="ID_GAMEOBJECT_FK" ColumnName="ID_GAMEOBJECT_FK" />
+                <ScalarProperty Name="ID_RESOURCE_FK" ColumnName="ID_RESOURCE_FK" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TABGenerate">
+            <EntityTypeMapping TypeName="ResourceModel.TABGenerate">
+              <MappingFragment StoreEntitySet="TABGenerate">
+                <ScalarProperty Name="ID_GAME_OBJECT_FK" ColumnName="ID_GAME_OBJECT_FK" />
+                <ScalarProperty Name="ID_RESOURCE_FK" ColumnName="ID_RESOURCE_FK" />
+                <ScalarProperty Name="Time" ColumnName="Time" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TABGameObject">
+            <EntityTypeMapping TypeName="ResourceModel.TABGameObject">
+              <MappingFragment StoreEntitySet="TABGameObject">
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
+                <ScalarProperty Name="ID_CATEGORY_FK" ColumnName="ID_CATEGORY_FK" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TABAdmin">
+            <EntityTypeMapping TypeName="ResourceModel.TABAdmin">
+              <MappingFragment StoreEntitySet="TABAdmin">
+                <ScalarProperty Name="Picture" ColumnName="Picture" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Pass" ColumnName="Pass" />
+                <ScalarProperty Name="Nick" ColumnName="Nick" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TABGame">
+            <EntityTypeMapping TypeName="ResourceModel.TABGame">
+              <MappingFragment StoreEntitySet="TABGame">
+                <ScalarProperty Name="Logo" ColumnName="Logo" />
+                <ScalarProperty Name="ID_ADMIN_FK" ColumnName="ID_ADMIN_FK" />
+                <ScalarProperty Name="GoogleClientSecret" ColumnName="GoogleClientSecret" />
+                <ScalarProperty Name="GoogleClientID" ColumnName="GoogleClientID" />
+                <ScalarProperty Name="FacebookAppSecret" ColumnName="FacebookAppSecret" />
+                <ScalarProperty Name="FacebookAuth" ColumnName="FacebookAuth" />
+                <ScalarProperty Name="FacebookAppID" ColumnName="FacebookAppID" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="CSS" ColumnName="CSS" />
+                <ScalarProperty Name="Dominio" ColumnName="Dominio" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TABPlayer">
+            <EntityTypeMapping TypeName="ResourceModel.TABPlayer">
+              <MappingFragment StoreEntitySet="TABPlayer">
+                <ScalarProperty Name="ID_GAME_FK" ColumnName="ID_GAME_FK" />
+                <ScalarProperty Name="TokenGoogle" ColumnName="TokenGoogle" />
+                <ScalarProperty Name="TokenFacebook" ColumnName="TokenFacebook" />
+                <ScalarProperty Name="Picture" ColumnName="Picture" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Pass" ColumnName="Pass" />
+                <ScalarProperty Name="Nick" ColumnName="Nick" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUsers">
+            <EntityTypeMapping TypeName="ResourceModel.AspNetUsers">
+              <MappingFragment StoreEntitySet="AspNetUsers">
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="AccessFailedCount" ColumnName="AccessFailedCount" />
+                <ScalarProperty Name="LockoutEnabled" ColumnName="LockoutEnabled" />
+                <ScalarProperty Name="LockoutEndDateUtc" ColumnName="LockoutEndDateUtc" />
+                <ScalarProperty Name="TwoFactorEnabled" ColumnName="TwoFactorEnabled" />
+                <ScalarProperty Name="PhoneNumberConfirmed" ColumnName="PhoneNumberConfirmed" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="SecurityStamp" ColumnName="SecurityStamp" />
+                <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+                <ScalarProperty Name="EmailConfirmed" ColumnName="EmailConfirmed" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TABEvent">
+            <EntityTypeMapping TypeName="ResourceModel.TABEvent">
+              <MappingFragment StoreEntitySet="TABEvent">
+                <ScalarProperty Name="ID_NOTIFICATION_FK" ColumnName="ID_NOTIFICATION_FK" />
+                <ScalarProperty Name="expiration" ColumnName="expiration" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TABNotification">
+            <EntityTypeMapping TypeName="ResourceModel.TABNotification">
+              <MappingFragment StoreEntitySet="TABNotification">
+                <ScalarProperty Name="hasRead" ColumnName="hasRead" />
+                <ScalarProperty Name="ID_PLAYER_FK" ColumnName="ID_PLAYER_FK" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="TABHoldGameObject" TypeName="ResourceModel.TABHoldGameObject" StoreEntitySet="TABHoldGameObject">
+            <EndProperty Name="TABGameObject">
+              <ScalarProperty Name="ID" ColumnName="ID_GAMEOBJECT_FK" />
+            </EndProperty>
+            <EndProperty Name="TABEvent">
+              <ScalarProperty Name="ID" ColumnName="ID_EVENT_FK" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <EntitySetMapping Name="TABInitialGameObject">
+            <EntityTypeMapping TypeName="ResourceModel.TABInitialGameObject">
+              <MappingFragment StoreEntitySet="TABInitialGameObject">
+                <ScalarProperty Name="ID_GAME_FK" ColumnName="ID_GAME_FK" />
+                <ScalarProperty Name="ID_GAMEOBJECT_FK" ColumnName="ID_GAMEOBJECT_FK" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TABInitialResource">
+            <EntityTypeMapping TypeName="ResourceModel.TABInitialResource">
+              <MappingFragment StoreEntitySet="TABInitialResource">
+                <ScalarProperty Name="ID_GAME_FK" ColumnName="ID_GAME_FK" />
+                <ScalarProperty Name="ID_RESOURCE_FK" ColumnName="ID_RESOURCE_FK" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TABActionConfig">
+            <EntityTypeMapping TypeName="IsTypeOf(ResourceModel.TABActionConfig)">
+              <MappingFragment StoreEntitySet="TABActionConfig">
+                <ScalarProperty Name="ID_GAMEOBJECT" ColumnName="ID_GAMEOBJECT" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID_GAME_FK" ColumnName="ID_GAME_FK" />
+              </MappingFragment>
+            </EntityTypeMapping>
+            <EntityTypeMapping TypeName="IsTypeOf(ResourceModel.TABCreateConfig)">
+              <MappingFragment StoreEntitySet="TABActionConfig">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <Condition ColumnName="Type" Value="1" />
+              </MappingFragment>
+            </EntityTypeMapping>
+            <EntityTypeMapping TypeName="IsTypeOf(ResourceModel.TABLevelUpConfig)">
+              <MappingFragment StoreEntitySet="TABActionConfig">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="LevelUpGenerateRate" ColumnName="LevelUpGenerateRate" />
+                <ScalarProperty Name="LevelUpCostRate" ColumnName="LevelUpCostRate" />
+                <Condition ColumnName="Type" Value="2" />
+              </MappingFragment>
+            </EntityTypeMapping>
+            <EntityTypeMapping TypeName="IsTypeOf(ResourceModel.TABDonateConfig)">
+              <MappingFragment StoreEntitySet="TABActionConfig">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <Condition ColumnName="Type" Value="4" />
+              </MappingFragment>
+            </EntityTypeMapping>
+            <EntityTypeMapping TypeName="IsTypeOf(ResourceModel.TABSellConfig)">
+              <MappingFragment StoreEntitySet="TABActionConfig">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <Condition ColumnName="Type" Value="5" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TABActionConfigDepends">
+            <EntityTypeMapping TypeName="ResourceModel.TABActionConfigDepends">
+              <MappingFragment StoreEntitySet="TABActionConfigDepends">
+                <ScalarProperty Name="Value" ColumnName="Value" />
+                <ScalarProperty Name="ID_ATTRIBUTE" ColumnName="ID_ATTRIBUTE" />
+                <ScalarProperty Name="ID_GAMEOBJECT" ColumnName="ID_GAMEOBJECT" />
+                <ScalarProperty Name="ID_ACTIONCONFIG" ColumnName="ID_ACTIONCONFIG" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TABAttackConfig1Set">
+            <EntityTypeMapping TypeName="IsTypeOf(ResourceModel.TABAttackConfig1)">
+              <MappingFragment StoreEntitySet="TABAttackConfig">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="ID_GAME_FK" ColumnName="ID_GAME_FK" />
+                <ScalarProperty Name="PercentGain" ColumnName="PercentGain" />
+                <ScalarProperty Name="PercentLoss" ColumnName="PercentLoss" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+            <EntityTypeMapping TypeName="IsTypeOf(ResourceModel.SimpleAttack)">
+              <MappingFragment StoreEntitySet="TABAttackConfig">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <Condition ColumnName="Type" Value="1" />
+              </MappingFragment>
+            </EntityTypeMapping>
+            <EntityTypeMapping TypeName="IsTypeOf(ResourceModel.GroupAttack)">
+              <MappingFragment StoreEntitySet="TABAttackConfig">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="MaxPlayers" ColumnName="MaxPlayers" />
+                <Condition ColumnName="Type" Value="2" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="TABAttackGameObject" TypeName="ResourceModel.TABAttackGameObject" StoreEntitySet="TABAttackGameObject">
+            <EndProperty Name="TABGameObject">
+              <ScalarProperty Name="ID" ColumnName="ID_GAMEOBJECT_FK" />
+            </EndProperty>
+            <EndProperty Name="TABAttackConfig1">
+              <ScalarProperty Name="ID" ColumnName="ID_ATTACKCONFIG_FK" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <EntitySetMapping Name="TABGroup">
+            <EntityTypeMapping TypeName="ResourceModel.TABGroup">
+              <MappingFragment StoreEntitySet="TABGroup">
+                <ScalarProperty Name="ID_GAME_FK" ColumnName="ID_GAME_FK" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TABGroupMessage">
+            <EntityTypeMapping TypeName="ResourceModel.TABGroupMessage">
+              <MappingFragment StoreEntitySet="TABGroupMessage">
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Text" ColumnName="Text" />
+                <ScalarProperty Name="ID_GROUP_FK" ColumnName="ID_GROUP_FK" />
+                <ScalarProperty Name="ID_PLAYER_FK" ColumnName="ID_PLAYER_FK" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TABGroupPlayer">
+            <EntityTypeMapping TypeName="ResourceModel.TABGroupPlayer">
+              <MappingFragment StoreEntitySet="TABGroupPlayer">
+                <ScalarProperty Name="Admin" ColumnName="Admin" />
+                <ScalarProperty Name="ID_GROUP_FK" ColumnName="ID_GROUP_FK" />
+                <ScalarProperty Name="ID_PLAYER_FK" ColumnName="ID_PLAYER_FK" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          </EntityContainerMapping>
+</Mapping></edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="False" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

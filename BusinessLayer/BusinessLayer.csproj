@@ -1,0 +1,108 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{3BB92EFA-F84C-4966-93BB-8B584D79671B}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>BusinessLayer</RootNamespace>
+    <AssemblyName>BusinessLayer</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.8.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Implementation\BLActionConfig.cs" />
+    <Compile Include="Implementation\BLAdmin.cs" />
+    <Compile Include="Implementation\BLAttack.cs" />
+    <Compile Include="Implementation\BLAttribute.cs" />
+    <Compile Include="Implementation\BLCategory.cs" />
+    <Compile Include="Implementation\BLCreate.cs" />
+    <Compile Include="Implementation\BLGame.cs" />
+    <Compile Include="Implementation\BLGameObject.cs" />
+    <Compile Include="Implementation\BLGenerate.cs" />
+    <Compile Include="Implementation\BLCost.cs" />
+    <Compile Include="Implementation\BLGenericCrud.cs" />
+    <Compile Include="Implementation\BLGroup.cs" />
+    <Compile Include="Implementation\BLInitialGameObject.cs" />
+    <Compile Include="Implementation\BLInitialResource.cs" />
+    <Compile Include="Implementation\BLLevelUp.cs" />
+    <Compile Include="Implementation\BLResource.cs" />
+    <Compile Include="Implementation\BLVirtualSpace.cs" />
+    <Compile Include="Interface\IBLAdmin.cs" />
+    <Compile Include="Interface\IBLCreate.cs" />
+    <Compile Include="Interface\IBLGroup.cs" />
+    <Compile Include="Interface\IBLInitialGameObject.cs" />
+    <Compile Include="Interface\IBLActionConfig.cs" />
+    <Compile Include="Interface\IBLAttribute.cs" />
+    <Compile Include="Interface\IBLCategory.cs" />
+    <Compile Include="Interface\IBLGame.cs" />
+    <Compile Include="Interface\IBLGameObject.cs" />
+    <Compile Include="Interface\IBLGenerate.cs" />
+    <Compile Include="Interface\IBLCost.cs" />
+    <Compile Include="Interface\IBLGenericCRUD.cs" />
+    <Compile Include="Interface\IBLInitialResource.cs" />
+    <Compile Include="Interface\IBLLevelUp.cs" />
+    <Compile Include="Interface\IBLResource.cs" />
+    <Compile Include="Interface\IBLAttack.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DataLayer\DataLayer.csproj">
+      <Project>{4ADC390D-CB8F-4406-ABF0-9AD80F143C1B}</Project>
+      <Name>DataLayer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Shared\Shared.csproj">
+      <Project>{53EEE485-7ED3-4903-97A8-21FB7497455E}</Project>
+      <Name>Shared</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

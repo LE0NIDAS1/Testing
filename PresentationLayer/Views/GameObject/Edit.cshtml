@@ -1,0 +1,219 @@
+﻿@model PresentationLayer.Models.GameObjectModel
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Edit</h2>
+
+
+@using (Html.BeginForm("Edit", "GameObject", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="form-horizontal">
+        <h4>GameObjectModel</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.Id)
+
+        <ul class="nav nav-tabs" role="tablist">
+            <li role="presentation" class="active"><a href="#GameObjectModel" role="tab" data-toggle="tab">GameObjectModel</a></li>
+            <li role="presentation"><a href="#Attribute" role="tab" data-toggle="tab">Attribute</a></li>
+            <li role="presentation"><a href="#Costes" role="tab" data-toggle="tab">Costes</a></li>
+            <li role="presentation"><a href="#Generate" role="tab" data-toggle="tab">Generate</a></li>
+
+        </ul>
+        <div class="tab-content">
+            <div role="tabpanel" class="tab-pane active" id="GameObjectModel">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control", required = "required" } })
+                        @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+               
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.TextAreaFor(model => model.Description, new { @class = "form-control", maxlength = "250", rows = "5", required = "required" })
+                        @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-md-2">@Html.DisplayNameFor(model => model.Image)</label>
+
+                    <div class="col-md-10">
+                        <img src="@Model.Image" class="img-thumbnail" width="304" height="236" id="Image">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Image_file, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Image_file, new { htmlAttributes = new { type = "file", accept = "image/jpeg,image/x-png,image/gif", @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Image_file, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.IdCategory, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.DropDownListFor(model => model.IdCategory, ViewData["Categoria"] as SelectList, new { @class = "form-control", required = "required" })
+                        @Html.ValidationMessageFor(model => model.IdCategory, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+            </div>
+            <div role="tabpanel" class="tab-pane" id="Attribute">
+                <p>
+                    @Html.ActionLink("Create New", "Create", "Attribute", new { idGameObject = Model.Id }, null)
+                </p>
+                <table class="table">
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.AttributeModel.Name)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.AttributeModel.valor)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.AttributeModel.Type)
+                        </th>
+                        <th></th>
+                    </tr>
+
+                    @foreach (var item in (Model.attributes))
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Name)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.valor)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Type)
+                            </td>
+                            <td>
+                                @Html.ActionLink("Edit", "Edit", "Attribute", new { id = item.id, idGameObject = Model.Id }, null) |
+                                @*@Html.ActionLink("Details", "Details", "Attribute", new { id = item.id }, null) |*@
+                                @Html.ActionLink("Delete", "Delete", "Attribute", new { idGameObject = Model.Id, id = item.id }, null)
+                            </td>
+                        </tr>
+                    }
+
+                </table>
+            </div>
+            <div role="tabpanel" class="tab-pane" id="Costes">
+                <p>
+                    @Html.ActionLink("Create New", "Create", "Cost", new { idGameObject = Model.Id, idGame = this.Request.QueryString["idGame"] }, null)
+                </p>
+                <table class="table">
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.CostModel.cant)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.CostModel.id_Resource)
+                        </th>
+                        <th></th>
+                    </tr>
+
+                    @foreach (var item in (Model.costes))
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.cant)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.id_Resource)
+                            </td>
+                            <td>
+                                @Html.ActionLink("Edit", "Edit", "Cost", new { id = item.Id }, null) |
+                                @*@Html.ActionLink("Details", "Details", "Cost", new { id = item.Id }, null) |*@
+                                @Html.ActionLink("Delete", "Delete", "Cost", new { idGameObject = Model.Id, id = item.Id }, null)
+                            </td>
+                        </tr>
+                    }
+
+                </table>
+            </div>
+            <div role="tabpanel" class="tab-pane" id="Generate">
+                <p>
+                    @Html.ActionLink("Create New", "Create", "Generate", new { idGameObject = Model.Id, idGame = this.Request.QueryString["idGame"] }, null)
+                </p>
+                <table class="table">
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.GenerateModel.time)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.GenerateModel.Quantity)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.GenerateModel.Resource)
+                        </th>
+
+                        <th></th>
+                    </tr>
+
+                    @foreach (var item in (Model.generates))
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.time)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Quantity)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Resource)
+                            </td>
+                            <td>
+                                @Html.ActionLink("Edit", "Edit", "Generate", new { id = item.Id }, null) |
+                                @*@Html.ActionLink("Details", "Details", "Generate", new { id = item.Id }, null) |*@
+                                @Html.ActionLink("Delete", "Delete", "Generate", new { idGameObject = Model.Id, id = item.Id }, null)
+                            </td>
+                        </tr>
+                    }
+
+                </table>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-info" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to Game", "Index", "Game")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript">
+
+        function readURL(input) {
+
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#Image').attr('src', e.target.result);
+                }
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        $("#Image_file").change(function () {
+            readURL(this);
+        });
+    </script>
+}

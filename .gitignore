@@ -1,0 +1,23 @@
+﻿################################################################################
+# Este archivo .gitignore ha sido creado automáticamente por Microsoft(R) Visual Studio.
+################################################################################
+
+/.vs/config/applicationhost.config
+/.vs
+/BusinessLayer/bin
+/BusinessLayer/obj
+/DataLayer/bin
+/DataLayer/obj
+/FrontEndPresentarionLayer/bin
+/FrontEndPresentarionLayer/obj
+/PresentationLayer/bin
+/PresentationLayer/obj
+/ServiceLayer/bin
+/ServiceLayer/obj
+/Shared/bin
+/Shared/obj
+/packages
+/PresentationLayer/images
+/Utilities/bin
+/Utilities/obj
+/DataLayer/Model/TABGroup.cs

@@ -1,0 +1,66 @@
+﻿@model PresentationLayer.Models.ActionConfigModel
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Create</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>ActionConfigModel</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @*<div class="form-group">
+                @Html.LabelFor(model => model.name, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.name, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.name, "", new { @class = "text-danger" })
+                </div>
+            </div>*@
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.TypeAction, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.TypeAction, ViewData["ActionConfig"] as SelectList)
+                @Html.ValidationMessageFor(model => model.TypeAction, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        @*<div class="form-group">
+                @Html.LabelFor(model => model.IDGame, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.IDGame, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.IDGame, "", new { @class = "text-danger" })
+                </div>
+            </div>*@
+        @Html.HiddenFor(model => model.IDGame)
+        <div id="Create" hidden="hidden">
+            @Html.Action("CreateActionCreatePartial", "Create")
+        </div>
+
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to Game", "Index", "Game")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript">
+        $('#TypeAction').on('change', function () {
+            if ($("#TypeAction option:selected").text() == "Crear") {
+                $('#Create').prop("hidden", false);
+            }
+            else {
+                $('#Create').prop("hidden", true);
+            }
+        });
+    </script>
+}

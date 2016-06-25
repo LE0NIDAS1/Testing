@@ -1,0 +1,49 @@
+﻿@model System.Web.Mvc.HandleErrorInfo
+
+@{
+    ViewBag.Title = "Error";
+}
+
+<!DOCTYPE html>
+<html lang="es" class="no-js">
+<head>
+    <meta charset="utf-8" />
+    <title>Error</title>
+    <script>document.getElementsByTagName('html')[0].setAttribute("class", "js");</script>
+    <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+    <meta name="viewport" content="user-scalable=no, width=device-width" />
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+</head>
+<body id='pgHome' style="background-color: #f6f6f6;">
+    <div id="pre">
+        <div id="wrapper">
+            <div id="central">
+                <div class="contenedorControles" style="background-color: #fff;border: 1px solid #ccc;    margin-left: 0;    margin-right: 10px;    margin-top: 57px;    padding-top: 50px;    font-weight: 600;">
+                    <div style="text-align:center;margin-bottom:20px;"><img src="~/Content/ic-alerta-grande.png" alt="" /></div>
+                    <div style="text-align: center; font-size: 16px; margin-bottom: 10px;">ACCESO NO AUTORIZADO</div>
+                    <div style="text-align: center; font-size: 12px; font-weight:200;">
+                        Usted no tiene privilegios para realizar la acción solicitada.
+                        <br />Consulte al administrador del sistema.
+                    </div>
+                    <div style="text-align:center;margin-top:20px;">
+                        <div id="btn_regresar" style="background-color: #004a84; border-radius: 2px; color: #fff; font-size: 14px; font-weight: 600; margin-bottom:15px;padding-bottom:10px; height: 34px; margin-left: auto; margin-right: auto; padding-top: 6px; text-align: center; width: 180px; cursor: pointer;" onclick="window.location.href = '/Home'">Ir a la página principal</div>
+                    </div>
+                </div>
+            </div>
+            <script type="text/javascript">
+                $(document).ready(function () {
+                    $("#mostrarocultardetalle").click(function () {
+                        $("#detalleerror").slideToggle("slow");
+                    });
+                });
+            </script>
+
+
+        </div>
+    </div>
+</body>
+
+</html>

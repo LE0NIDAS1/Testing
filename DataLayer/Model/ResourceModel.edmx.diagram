@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="5bb094b17f8148ea82490877b99e409b" Name="Diagram1" ZoomLevel="88">
+        <EntityTypeShape EntityType="ResourceModel.TABResource" Width="1.5" PointX="0.5" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="ResourceModel.TABCategory" Width="1.5" PointX="7.625" PointY="4.5" />
+        <EntityTypeShape EntityType="ResourceModel.TABAttribute" Width="1.5" PointX="14.5" PointY="3.875" />
+        <EntityTypeShape EntityType="ResourceModel.TABCost" Width="1.5" PointX="3.75" PointY="3.875" />
+        <EntityTypeShape EntityType="ResourceModel.TABGenerate" Width="1.5" PointX="3.25" PointY="0.5" />
+        <AssociationConnector Association="ResourceModel.FK_TABCost_TABResource" />
+        <AssociationConnector Association="ResourceModel.FK_TABGenerate_TABResource" />
+        <EntityTypeShape EntityType="ResourceModel.TABGameObject" Width="1.5" PointX="11.75" PointY="3.625" />
+        <AssociationConnector Association="ResourceModel.FK_TABAttribute_TABGameObject" />
+        <AssociationConnector Association="ResourceModel.FK_TABGameObject_TABCategory" />
+        <AssociationConnector Association="ResourceModel.FK_TABCost_TABGameObject" />
+        <AssociationConnector Association="ResourceModel.FK_TABGenerate_TABGameObject" />
+        <EntityTypeShape EntityType="ResourceModel.TABAdmin" Width="1.5" PointX="3.25" PointY="7.25" />
+        <EntityTypeShape EntityType="ResourceModel.TABGame" Width="1.5" PointX="0.5" PointY="4.625" />
+        <EntityTypeShape EntityType="ResourceModel.TABPlayer" Width="1.5" PointX="3.25" PointY="10" />
+        <AssociationConnector Association="ResourceModel.FK_TABGame_TABAdmin" />
+        <AssociationConnector Association="ResourceModel.FK_TABCategory_TABGame" />
+        <AssociationConnector Association="ResourceModel.FK_TABPlayer_TABGame" />
+        <AssociationConnector Association="ResourceModel.FK_TABResource_TABGame" />
+        <EntityTypeShape EntityType="ResourceModel.AspNetUsers" Width="1.5" PointX="7" PointY="8.125" />
+        <AssociationConnector Association="ResourceModel.FK_TABAdmin_TABAdmin" />
+        <EntityTypeShape EntityType="ResourceModel.TABEvent" Width="1.5" PointX="11.875" PointY="9.5" />
+        <EntityTypeShape EntityType="ResourceModel.TABNotification" Width="1.5" PointX="6.25" PointY="13" />
+        <AssociationConnector Association="ResourceModel.FK_TABEvent_TABNotification1" />
+        <AssociationConnector Association="ResourceModel.FK_TABNotification_TABPlayer" />
+        <AssociationConnector Association="ResourceModel.TABHoldGameObject" />
+        <EntityTypeShape EntityType="ResourceModel.TABInitialGameObject" Width="1.875" PointX="15" PointY="9.125" />
+        <EntityTypeShape EntityType="ResourceModel.TABInitialResource" Width="1.5" PointX="10" PointY="12.875" />
+        <EntityTypeShape EntityType="ResourceModel.TABActionConfig" Width="1.5" PointX="2.75" PointY="17.625" />
+        <EntityTypeShape EntityType="ResourceModel.TABActionConfigDepends" Width="1.5" PointX="10.875" PointY="18" />
+        <AssociationConnector Association="ResourceModel.FK_TABActionConfig_TABGame" />
+        <AssociationConnector Association="ResourceModel.FK_TABActionConfigDepends_TABActionConfig" ></AssociationConnector>
+        <AssociationConnector Association="ResourceModel.FK_TABActionConfigDepends_TABAttribute1" />
+        <AssociationConnector Association="ResourceModel.FK_TABActionConfigDepends_TABGameObject" />
+        <EntityTypeShape EntityType="ResourceModel.TABCreateConfig" Width="1.5" PointX="0.5" PointY="21.375" />
+        <InheritanceConnector EntityType="ResourceModel.TABCreateConfig" />
+        <EntityTypeShape EntityType="ResourceModel.TABLevelUpConfig" Width="1.5" PointX="5" PointY="22.625" />
+        <InheritanceConnector EntityType="ResourceModel.TABLevelUpConfig" />
+        <AssociationConnector Association="ResourceModel.FK_TABActionConfig_TABGameObject" ></AssociationConnector>
+        <EntityTypeShape EntityType="ResourceModel.TABDonateConfig" Width="1.5" PointX="5.75" PointY="20.75" />
+        <InheritanceConnector EntityType="ResourceModel.TABDonateConfig" />
+        <EntityTypeShape EntityType="ResourceModel.TABSellConfig" Width="1.5" PointX="0.75" PointY="23.75" />
+        <InheritanceConnector EntityType="ResourceModel.TABSellConfig" />
+        <AssociationConnector Association="ResourceModel.FK_TABInitialGameObject_TABGame" />
+        <AssociationConnector Association="ResourceModel.FK_TABInitialResource_TABGame" />
+        <AssociationConnector Association="ResourceModel.FK_TABInitialGameObject_TABGameObject2" />
+        <AssociationConnector Association="ResourceModel.FK_TABInitialResource_TABResource1" />
+        <EntityTypeShape EntityType="ResourceModel.TABAttackConfig1" Width="1.5" PointX="17.875" PointY="3" />
+        <AssociationConnector Association="ResourceModel.FK_TABAttackConfig_TABGame1" />
+        <AssociationConnector Association="ResourceModel.TABAttackGameObject" />
+        <EntityTypeShape EntityType="ResourceModel.SimpleAttack" Width="1.5" PointX="21.625" PointY="3.125" />
+        <InheritanceConnector EntityType="ResourceModel.SimpleAttack" />
+        <EntityTypeShape EntityType="ResourceModel.GroupAttack" Width="1.5" PointX="21.625" PointY="4.75" />
+        <InheritanceConnector EntityType="ResourceModel.GroupAttack" />
+        <EntityTypeShape EntityType="ResourceModel.TABGroup" Width="1.5" PointX="2.75" PointY="26.125" />
+        <EntityTypeShape EntityType="ResourceModel.TABGroupMessage" Width="1.5" PointX="5.5" PointY="16.875" />
+        <EntityTypeShape EntityType="ResourceModel.TABGroupPlayer" Width="1.5" PointX="8.5" PointY="18.125" />
+        <AssociationConnector Association="ResourceModel.FK_TABGroup_TABGame" />
+        <AssociationConnector Association="ResourceModel.FK_TABGroupMessage_TABGroup" />
+        <AssociationConnector Association="ResourceModel.FK_TABGroupPlayer_TABGroup" />
+        <AssociationConnector Association="ResourceModel.FK_TABGroupMessage_TABPlayer" />
+        <AssociationConnector Association="ResourceModel.FK_TABGroupPlayer_TABPlayer" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
