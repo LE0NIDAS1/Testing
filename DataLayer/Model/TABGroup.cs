@@ -22,7 +22,7 @@ public partial class TABGroup
     public TABGroup()
     {
 
-        
+        this.TABGroupMessage = new HashSet<TABGroupMessage>();
 
         this.TABGroupPlayer = new HashSet<TABGroupPlayer>();
 
@@ -39,7 +39,9 @@ public partial class TABGroup
 
     public virtual TABGame TABGame { get; set; }
 
-    
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+
+    public virtual ICollection<TABGroupMessage> TABGroupMessage { get; set; }
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
 
