@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Testing.Helper;
 
 namespace Testing.Casos_de_uso
 {
@@ -23,12 +24,15 @@ namespace Testing.Casos_de_uso
         [Test]
         public void login()
         {
+           
+            ExcelLibrary.PopulateInCollection(Environment.CurrentDirectory.Substring(0, Environment.CurrentDirectory.IndexOf("bin"))+@"Helper\Pruebas.xlsx");
+            
             IWebElement element = driver.FindElement(By.Id("loginLink"));
             element.Click();
             IWebElement email = driver.FindElement(By.Id("Email"));
-            email.SendKeys("Admin@atlas.com");
+            email.SendKeys(ExcelLibrary.ReadData(1, "email"));
             IWebElement pass = driver.FindElement(By.Id("Password"));
-            pass.SendKeys("Atlas@123");
+            pass.SendKeys(ExcelLibrary.ReadData(1, "pass"));
             IWebElement btn = driver.FindElement(By.Id("save"));
             btn.Submit();
         }
