@@ -19,10 +19,10 @@ namespace Test
             IWebDriver driver = new ChromeDriver(algo.Substring(0, algo.IndexOf("bin")));
 
             CasosDeUsos casos = new CasosDeUsos();
-            casos.initialize(driver);
+            casos.initialize();
             //Iniciar sesion
-            casos.login(driver);
-            casos.cleanUp(driver);
+            casos.login();
+            casos.cleanUp();
 
         }
     }
