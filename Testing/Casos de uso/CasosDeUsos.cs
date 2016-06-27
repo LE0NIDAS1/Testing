@@ -57,7 +57,7 @@ namespace Testing.Casos_de_uso
 
             btn = driver.FindElement(By.LinkText("Inicio »"));
             btn.Click();
-            /*btn = driver.FindElement(By.LinkText("Create New"));
+            btn = driver.FindElement(By.LinkText("Create New"));
             btn.Click();
             IWebElement name = driver.FindElement(By.Name("name"));
             name.SendKeys(ExcelLibrary.ReadData(1, "name"));
@@ -79,12 +79,12 @@ namespace Testing.Casos_de_uso
             name.SendKeys(ExcelLibrary.ReadData(1, "GoogleClientSecret"));
             btn = driver.FindElement(By.Id("submitGame"));
             btn.Submit();
-            */
+            
             //agregar categoria
             
             btn = driver.FindElements(By.LinkText("Edit")).Last();
             btn.Click();
-            /*ExcelLibrary.PopulateInCollection(Environment.CurrentDirectory.Substring(0, Environment.CurrentDirectory.IndexOf("bin")) + @"Helper\DatosCategory.xlsx");
+            ExcelLibrary.PopulateInCollection(Environment.CurrentDirectory.Substring(0, Environment.CurrentDirectory.IndexOf("bin")) + @"Helper\DatosCategory.xlsx");
             btn = driver.FindElements(By.Id("IdCategory")).First();
             btn.Click();
             btn = driver.FindElement(By.LinkText("Create New"));
@@ -95,32 +95,110 @@ namespace Testing.Casos_de_uso
             element.SendKeys(ExcelLibrary.ReadData(1, "tooltip"));
             btn = driver.FindElement(By.Id("submitCategory"));
             btn.Submit();
-            */
             
+
             //Agregar Recurso
+            ExcelLibrary.PopulateInCollection(Environment.CurrentDirectory.Substring(0, Environment.CurrentDirectory.IndexOf("bin")) + @"Helper\DatosResource.xlsx");
             btn = driver.FindElements(By.Id("IdResource")).First();
             btn.Click();
             btn = driver.FindElement(By.LinkText("Create New"));
             btn.Click();
-
-
+            element = driver.FindElement(By.Name("Name"));
+            element.SendKeys(ExcelLibrary.ReadData(1, "NameResource"));
+            btn = driver.FindElement(By.Id("submitResource"));
+            btn.Submit();
+            
             //Agregar GameObject
-            /*ExcelLibrary.PopulateInCollection(Environment.CurrentDirectory.Substring(0, Environment.CurrentDirectory.IndexOf("bin")) + @"Helper\DatosGameObject.xlsx");
+            ExcelLibrary.PopulateInCollection(Environment.CurrentDirectory.Substring(0, Environment.CurrentDirectory.IndexOf("bin")) + @"Helper\DatosGameObject.xlsx");
             btn = driver.FindElements(By.Id("IdGameObject")).First();
             btn.Click();
             btn = driver.FindElement(By.LinkText("Create New"));
             btn.Click();
             element = driver.FindElement(By.Name("Name"));
-            element.SendKeys(ExcelLibrary.ReadData(1, "Name"));
+            element.SendKeys(ExcelLibrary.ReadData(1, "NameObject"));
             element = driver.FindElement(By.Name("Description"));
             element.SendKeys(ExcelLibrary.ReadData(1, "Description"));
-            new SelectElement(driver.FindElement(By.Name("IdCategory"))).SelectByText(ExcelLibrary.ReadData(1, "IdCategory"));
+            new SelectElement(driver.FindElement(By.Name("IdCategory"))).SelectByText(ExcelLibrary.ReadData(1, "IdCategoryObject"));
             btn = driver.FindElement(By.Id("submitGameObject"));
             btn.Submit();
-            */
 
 
-            Console.ReadKey();
+            //Agregar Attribute
+            btn = driver.FindElements(By.LinkText("Edit")).Last();
+            btn.Click();
+            ExcelLibrary.PopulateInCollection(Environment.CurrentDirectory.Substring(0, Environment.CurrentDirectory.IndexOf("bin")) + @"Helper\DatosAttribute.xlsx");
+            btn = driver.FindElements(By.Id("IdGameObject")).First();
+            btn.Click();
+            btn = driver.FindElements(By.LinkText("Edit")).Last();
+            btn.Click();
+            btn = driver.FindElements(By.Id("IdAttribute")).First();
+            btn.Click();
+            btn = driver.FindElements(By.LinkText("Create New")).Last();
+            btn.Click();
+            element = driver.FindElement(By.Name("Name"));
+            element.SendKeys(ExcelLibrary.ReadData(1, "NameAttribute"));
+            element = driver.FindElement(By.Name("valor"));
+            element.SendKeys(ExcelLibrary.ReadData(1, "valor"));
+            new SelectElement(driver.FindElement(By.Name("Type"))).SelectByText(ExcelLibrary.ReadData(1, "Type"));
+            btn = driver.FindElement(By.Id("submitResource"));
+            btn.Submit();
+            driver.Navigate().GoToUrl("https://localhost:44300/Game");
+
+
+            //Agregar Costos
+            ExcelLibrary.PopulateInCollection(Environment.CurrentDirectory.Substring(0, Environment.CurrentDirectory.IndexOf("bin")) + @"Helper\DatosCostes.xlsx");
+            btn = driver.FindElements(By.LinkText("Edit")).Last();
+            btn.Click();
+            btn = driver.FindElements(By.Id("IdGameObject")).First();
+            btn.Click();
+            btn = driver.FindElements(By.LinkText("Edit")).Last();
+            btn.Click();
+            btn = driver.FindElements(By.Id("IdCostes")).First();
+            btn.Click();
+            btn = driver.FindElements(By.LinkText("Create New")).Last();
+            btn.Click();
+
+            new SelectElement(driver.FindElement(By.Name("id_Resource"))).SelectByText(ExcelLibrary.ReadData(1, "id_Resource"));
+            element = driver.FindElement(By.Name("cant"));
+            element.SendKeys(ExcelLibrary.ReadData(1, "cant"));
+            btn = driver.FindElement(By.Id("submitCostes"));
+            btn.Submit();
+            
+
+            //agregar objetos iniciales
+            ExcelLibrary.PopulateInCollection(Environment.CurrentDirectory.Substring(0, Environment.CurrentDirectory.IndexOf("bin")) + @"Helper\DatosInitialObject.xlsx");
+            btn = driver.FindElements(By.LinkText("Edit")).Last();
+            btn.Click();
+            btn = driver.FindElements(By.Id("IdInitial")).First();
+            btn.Click();
+            btn = driver.FindElements(By.LinkText("Agregar Objetos al Iniciar")).Last();
+            btn.Click();
+            btn = driver.FindElements(By.LinkText("Create New")).Last();
+            btn.Click();
+            element = driver.FindElement(By.Name("Quantity"));
+            element.SendKeys(ExcelLibrary.ReadData(1, "Quantity"));
+            new SelectElement(driver.FindElement(By.Name("IdGameObject"))).SelectByText(ExcelLibrary.ReadData(1, "IdGameObjectInitial"));
+            btn = driver.FindElement(By.Id("submitInitial"));
+            btn.Submit();
+
+
+            //Agregar accion de creacion
+            driver.Navigate().GoToUrl("https://localhost:44300/Game");
+            ExcelLibrary.PopulateInCollection(Environment.CurrentDirectory.Substring(0, Environment.CurrentDirectory.IndexOf("bin")) + @"Helper\DatosAction.xlsx");
+            btn = driver.FindElements(By.LinkText("Edit")).Last();
+            btn.Click();
+            btn = driver.FindElements(By.Id("IdAction")).First();
+            btn.Click();
+            btn = driver.FindElements(By.LinkText("Create New")).Last();
+            btn.Click();
+            new SelectElement(driver.FindElement(By.Name("TypeAction"))).SelectByText(ExcelLibrary.ReadData(1, "TypeAction"));
+            new SelectElement(driver.FindElement(By.Name("idGameObject"))).SelectByText(ExcelLibrary.ReadData(1, "idGameObjectAction"));
+            btn = driver.FindElement(By.Id("submitAction"));
+            btn.Submit();
+
+
+
+            
 
 
         }
